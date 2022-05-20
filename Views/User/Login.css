@@ -1,0 +1,85 @@
+*{
+    margin: 0 auto;
+}
+body{
+    background-image:url('https://img0.baidu.com/it/u=3809453004,50666135&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800');
+   
+}
+.container{
+    position: relative;
+    top: 100px;
+}
+.news-nav{
+    clear: both;
+    height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+.news-nav li{
+    float: left;
+    list-style-type: none;
+    margin: 0 10px;
+    font-size: 25px;
+    display: block;
+    width: 80px;
+    height: 75px;
+    text-align: center;
+    line-height: 75px;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+}
+.news-nav li.on{
+    color: #74dcff;
+    border-bottom-color: #74dcff;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+#index-news-list-2{
+    display: none;
+}
+.modal-dialog{
+    max-width: 100% !important;
+}
+.modal-content{
+    background:rgba(0,0,10,0.5);
+    width: 450px;
+}
+.loginForm{
+    width: 400px;
+}
+.loginForm .form-group{
+    margin: 25px 0;
+}
+.loginForm .form-group .form-control{
+    height: 40px;
+    font-size: 15px;
+}
+input[type="checkbox"]{
+    position:relative;
+    top:-2px;
+    vertical-align: middle;
+    cursor: pointer;
+    zoom:1.6;
+}
+input[type="radio"]{
+    position:relative;
+    top:-3px;
+    vertical-align: middle;
+    cursor: pointer;
+    zoom:1.6;
+}
+.btn-primary{
+    background-color: #909090; 
+    border: 0px solid transparent;
+    width: 400px;
+    height: 50px;
+    font-size: 24px;
+    font-family: STKaiti;
+}
+label{
+    color: #fff;
+    font-size: 16px;
+}
