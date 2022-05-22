@@ -69,7 +69,9 @@ namespace MvcMovie.Controllers
                     user.UserPwd = Encrypt.ByMd5_1(user.UserPwd);
                     _context.Add(user);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index)); 
+                    //return RedirectToAction(nameof(Index)); 
+                    ViewData["success"] = "注册成功！";
+                    return View();
                 }
                 else
                 {
@@ -95,15 +97,26 @@ namespace MvcMovie.Controllers
         {
             ViewData["error"] = "";
             if(ModelState.IsValid){
-                
-                //检查用户和密码是否对应
-                var pwdMD5 = Encrypt.ByMd5_1(user.UserPwd);
-                var userinfo = _context.User.FromSqlRaw(string.Format("select * from User where UserName='{0}' and UserPwd='{1}'", user.UserName, pwdMD5)).ToList();
-                if (userinfo.Count != 0)
-                    return RedirectToAction("Index");
-                else
-                    ViewData["error"] = "密码输入错误";
-                    return View();
+
+                var userinfo0 = _context.User.FromSqlRaw(string.Format("select * from User where UserName='{0}'", user.UserName)).ToList();
+                // 检查用户是否存在
+                if (userinfo0.Count == 0)
+                {
+                    ViewData["error"] = "该用户未注册过";
+                    return View();                   
+                }else
+                {
+                     //检查用户和密码是否对应
+                    var pwdMD5 = Encrypt.ByMd5_1(user.UserPwd);
+                    if (userinfo0[0].UserPwd == pwdMD5)
+                    {
+                        return RedirectToAction("Index");
+                    }else
+                    {
+                        ViewData["error"] = "密码输入错误";
+                        return View();
+                    }
+                }
             }
             ViewData["error"] = "用户名或密码长度不合法";
             return View();

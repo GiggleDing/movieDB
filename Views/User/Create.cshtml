@@ -1,35 +1,186 @@
- @model MvcMovie.Models.User
+
+@model MvcMovie.Models.User
+
 
 @{
     ViewData["Title"] = "Create";
+} *
+
+
+<html>
+  <head>
+    <title>登录</title>
+	<meta name="decorator" content="default"/>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    <style>
+        *{
+    margin: 0 auto;
 }
+body{
+    background-image:url('https://img0.baidu.com/it/u=3809453004,50666135&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800');
+   
+}
+.container{
+    position: relative;
+    top: 100px;
+}
+.news-nav{
+    clear: both;
+    height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+.news-nav li{
+    float: left;
+    list-style-type: none;
+    margin: 0 10px;
+    font-size: 25px;
+    display: none;
+    width: 80px;
+    height: 75px;
+    text-align: center;
+    line-height: 75px;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+}
+.news-nav li.on{
+    color: #74dcff;
+    border-bottom-color: #74dcff;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+#index-news-list-2{
+    display: block;
+}
+.modal-dialog{
+    max-width: 100% !important;
+}
+.modal-content{
+    background:rgba(0,0,10,0.5);
+    width: 450px;
+}
+.loginForm{
+    width: 400px;
+}
+.loginForm .form-group{
+    margin: 25px 0;
+}
+.loginForm .form-group .form-control{
+    height: 40px;
+    font-size: 15px;
+}
+input[type="checkbox"]{
+    position:relative;
+    top:-2px;
+    vertical-align: middle;
+    cursor: pointer;
+    zoom:1.6;
+}
+input[type="radio"]{
+    position:relative;
+    top:-3px;
+    vertical-align: middle;
+    cursor: pointer;
+    zoom:1.6;
+}
+.btn-primary{
+    background-color: #909090; 
+    border: 0px solid transparent;
+    width: 400px;
+    height: 50px;
+    font-size: 24px;
+    font-family: STKaiti;
+}
+label{
+    color: #fff;
+    font-size: 16px;
+}
+  </style>
+  <script type="text/javascript">
+        function load()
+        {
+            var message = @ViewData["success"]
+            if(message == "注册成功！")
+            {
+                alert("注册成功！");  
+            }
+        }
+  </script>
+  </head>
+  <body onload="load()">
+	<div class="container">
+		<div class="modal-dialog" id="login_form">
+			<div class="modal-content">
 
-<h1>Create</h1>
+				<div class="modal-title">
+                    <br>
+                    <h1 style="color: white; margin: 2; text-align: center">注册</h1>
+				</div>
+				
+				<div class="modal-body index-news-list" id="index-news-list-2">
+					<form name="myForm" class="loginForm" onsubmit="return validateForm()" id="registerForm" asp-action="Create" method="post">
+						  <div class="form-group">
+							  <input class="form-control required" name="UserName" id="name" type="text" placeholder="请输入要注册的用户名或邮箱">
+						  </div>
+                          <p style="color: red; font-size: 12px" id="nameerror"></p>
+						  <div class="form-group">
+							  <input class="form-control required" name="UserPwd" id="rePassword" type="password" placeholder="请输入密码">
+						  </div>
+                          <p style="color: red; font-size: 12px" id="pwderror"></p>
+						  <div class="form-group">
+							  <input class="form-control required" name="" id="rePassword1" type="password" placeholder="请再次输入密码">
+						  </div>
+                          <p style="color: red; font-size: 12px" id="repwderror">@ViewData["error"]@ViewData["success"]</p>
+						  <div class="form-group">
+							  <button class="btn btn-primary" type="submit">注册</button>
+						  </div>
+                          
+                            <p class="change_link" style="color: white; font-size: 18px; text-align: center">
+                                <span class="text">已经有账号了</span>
+                                <a href="/User/Login" class="to_login">登录</a>
+                            </p>
+					 </form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<script>
+        function $(id){
+			return document.getElementById(id);
+		}
+        function validateForm()
+        {
+        var x=document.forms["myForm"]["UserName"].value;
+        if (x==null || x=="")
+        {
+            $('nameerror').innerHTML = "姓名必须填写！";
+            return false;
+        }
+        var x=document.forms["myForm"]["UserPwd"].value;
+        if (x==null || x=="")
+        {
+            $('pwderror').innerHTML = "密码必须填写！";
+            return false;
+        }
+        var y=document.forms["myForm"]["rePassword1"].value;
+        if (y==null || y=="")
+        {
+            $('repwderror').innerHTML = "确认密码必须填写！";
+            return false;
+        }
+        if (x != y)
+        {
+            alert("两次输入的密码不一致！");
+            return false;
+        }
+        }
 
-<h4>User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserPwd" class="control-label"></label>
-                <input asp-for="UserPwd" class="form-control" />
-                <span asp-validation-for="UserPwd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-            @ViewData["error"]
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div> 
+	</script>
+  </body>
+</html>
