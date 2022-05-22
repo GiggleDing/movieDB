@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using MvcMovie.Models;
-
 using System.Data;
 
 
@@ -14,6 +14,7 @@ namespace MvcMovie.Controllers
 {
     public class UserController : Controller
     {
+        
         private readonly MvcUserContext _context;
 
         public UserController(MvcUserContext context)
@@ -24,7 +25,9 @@ namespace MvcMovie.Controllers
         // GET: User
         public async Task<IActionResult> Index()
         {
+            //ViewBag.Code=HttpContext.Session.GetString("user");
             return View(await _context.User.ToListAsync());
+            //return Content(ViewBag.Code);
         }
 
         // GET: User/Details/5
@@ -110,6 +113,8 @@ namespace MvcMovie.Controllers
                     var pwdMD5 = Encrypt.ByMd5_1(user.UserPwd);
                     if (userinfo0[0].UserPwd == pwdMD5)
                     {
+                        //把用户id存进session中
+                        HttpContext.Session.SetString("user",userinfo0[0].Id.ToString());
                         return RedirectToAction("Index");
                     }else
                     {
@@ -122,6 +127,7 @@ namespace MvcMovie.Controllers
             return View();
  
         }
+
 
         // GET: Movies/Delete/5
         public async Task<IActionResult> Delete(int? id)
