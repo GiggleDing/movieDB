@@ -106,9 +106,12 @@ namespace MvcMovie.Controllers
             ViewData["error"] = "";
             if(ModelState.IsValid){
 
+                var userinfo0 = _context.User.FromSqlRaw(string.Format("select * from User where UserName='{0}'", user.UserName)).ToList();
+                
                 //如果当前的用户名是cookie里面的，就直接登录不用校验。
                 if(Request.Cookies["UserName"] == user.UserName)
                 {
+                    HttpContext.Session.SetString("user",userinfo0[0].Id.ToString());
                     if(Request.Form["remember"] == "1")
                     {
                         CookieOptions option = new CookieOptions(); 
@@ -121,8 +124,6 @@ namespace MvcMovie.Controllers
 
                 }
                
-
-                var userinfo0 = _context.User.FromSqlRaw(string.Format("select * from User where UserName='{0}'", user.UserName)).ToList();
                 // 检查用户是否存在
                 if (userinfo0.Count == 0)
                 {
