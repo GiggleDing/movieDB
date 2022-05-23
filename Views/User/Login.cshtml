@@ -3,7 +3,9 @@
 
 @{
     ViewData["Title"] = "Login";
+
 } *
+
 
 <html>
   <head>
@@ -15,70 +17,90 @@
     <style>
         *{
     margin: 0 auto;
-}
-body{
-    background-image:url('https://img0.baidu.com/it/u=3809453004,50666135&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800');
-   
-}
-.container{
-    position: relative;
-    top: 100px;
-}
-.news-nav{
-    clear: both;
-    height: 80px;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 300px;
-    margin: 0 auto;
-}
+    }
+    body{
+        background-image:url('https://img0.baidu.com/it/u=3809453004,50666135&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800');
+    
+    }
+    .container{
+        position: relative;
+        top: 100px;
+    }
+    .news-nav{
+        clear: both;
+        height: 80px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 300px;
+        margin: 0 auto;
+    }
 
-.modal-dialog{
-    max-width: 100% !important;
-}
-.modal-content{
-    background:rgba(0,0,10,0.5);
-    width: 450px;
-}
-.loginForm{
-    width: 400px;
-}
-.loginForm .form-group{
-    margin: 25px 0;
-}
-.loginForm .form-group .form-control{
-    height: 40px;
-    font-size: 15px;
-}
-input[type="checkbox"]{
-    position:relative;
-    top:-2px;
-    vertical-align: middle;
-    cursor: pointer;
-    zoom:1.6;
-}
-input[type="radio"]{
-    position:relative;
-    top:-3px;
-    vertical-align: middle;
-    cursor: pointer;
-    zoom:1.6;
-}
-.btn-primary{
-    background-color: #909090; 
-    border: 0px solid transparent;
-    width: 400px;
-    height: 50px;
-    font-size: 24px;
-    font-family: STKaiti;
-}
-label{
-    color: #fff;
-    font-size: 16px;
-}
+    .modal-dialog{
+        max-width: 100% !important;
+    }
+    .modal-content{
+        background:rgba(0,0,10,0.5);
+        width: 450px;
+    }
+    .loginForm{
+        width: 400px;
+    }
+    .loginForm .form-group{
+        margin: 25px 0;
+    }
+    .loginForm .form-group .form-control{
+        height: 40px;
+        font-size: 15px;
+    }
+    input[type="checkbox"]{
+        position:relative;
+        top:-2px;
+        vertical-align: middle;
+        cursor: pointer;
+        zoom:1.6;
+    }
+    input[type="radio"]{
+        position:relative;
+        top:-3px;
+        vertical-align: middle;
+        cursor: pointer;
+        zoom:1.6;
+    }
+    .btn-primary{
+        background-color: #909090; 
+        border: 0px solid transparent;
+        width: 400px;
+        height: 50px;
+        font-size: 24px;
+        font-family: STKaiti;
+    }
+    label{
+        color: #fff;
+        font-size: 16px;
+    }
     </style>
-  </head>
-  <body>
+    <script>
+
+    window.onload=function(){
+
+    let inputs=document.getElementsByTagName("input");
+
+    //上一次选中七天免登录是，这一次就默认为选中，否则为不选中。
+    if (@ViewData["remember"] == "1")
+    {
+        inputs[2].checked=true;
+    }
+    else
+    {
+        inputs[2].checked=false;
+    }
+
+    } 
+
+    </script> 
+
+    </head>
+    <body>
 	<div class="container">
 		<div class="modal-dialog" id="login_form">
 			<div class="modal-content">
@@ -91,18 +113,18 @@ label{
 				<div class="modal-body index-news-list" id="index-news-list-1">
 					<form name="myForm" class="loginForm" id="loginForm" onsubmit="return validateForm()" asp-action="Login" method="post" >
 						  <div class="form-group">
-							  <input class="form-control required" name="UserName" id="name" type="text" placeholder="请输入用户名或邮箱">
+							  <input class="form-control required" name="UserName" id="name" type="text" placeholder="请输入用户名或邮箱" value = @ViewData["UserName"]>
 						  </div>
                           
 						  <div class="form-group">
-							  <input class="form-control required" name="UserPwd" id="password" type="password" placeholder="请输入密码">
+							  <input class="form-control required" name="UserPwd" id="password" type="password" placeholder="请输入密码" value = @ViewData["UserPwd"]>
 						  </div>
-
+                          
                           <p style="color: red; font-size: 16px">@ViewData["error"]</p>
                           
 						  <div class="form-group">
 							  <label for="remember">
-								<input type="checkbox" name="remember" id="remember" value="0"/> 记住我
+								<input type="checkbox" name="remember" id="remember" value="0"/> 七天免登录
 							  </label>
 						  </div>
 						  <div class="form-group">
@@ -120,24 +142,30 @@ label{
 			</div>
 		</div>
 	</div>
-		<script>
+    <script>
 
-            function validateForm()
-            {
-            var x=document.forms["myForm"]["UserName"].value;
-            if (x==null || x=="")
-            {
-                alert("姓名必须填写！");
-                return false;
-            }
-            var x=document.forms["myForm"]["UserPwd"].value;
-            if (x==null || x=="")
-            {
-                alert("密码必须填写！");
-                return false;
-            }
-            }
+    function validateForm()
+    {
+    var x=document.forms["myForm"]["UserName"].value;
+    let checkbox=document.getElementsByTagName("input");
+    //用户选中七天免登录时
+    if (checkbox[2].checked != false)
+    {
+        checkbox[2].value = "1";
+    }
+    if (x==null || x=="")
+    {
+        alert("姓名必须填写！");
+        return false;
+    }
+    var x=document.forms["myForm"]["UserPwd"].value;
+    if (x==null || x=="")
+    {
+        alert("密码必须填写！");
+        return false;
+    }
+    }
 
-		</script>
+    </script>
   </body>
 </html>

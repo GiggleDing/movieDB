@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using MvcMovie.Models;
-using System.Data;
+using Microsoft.AspNetCore.Builder;
 
 
 namespace MvcMovie.Controllers
 {
+
     public class UserController : Controller
     {
-        
+
+        CookieBuilder cookie_user_name = new CookieBuilder();
+        CookieBuilder cookie_user_pwd = new CookieBuilder();      
         private readonly MvcUserContext _context;
 
         public UserController(MvcUserContext context)
@@ -27,7 +31,8 @@ namespace MvcMovie.Controllers
         {
             //ViewBag.Code=HttpContext.Session.GetString("user");
             return View(await _context.User.ToListAsync());
-            //return Content(ViewBag.Code);
+
+           
         }
 
         // GET: User/Details/5
@@ -90,6 +95,9 @@ namespace MvcMovie.Controllers
         // GET: User/Login
         public ActionResult Login(int? id)
         {
+            ViewData["UserName"] = Request.Cookies["UserName"];
+            ViewData["UserPwd"] = Request.Cookies["UserPwd"];
+            ViewData["remember"] = Request.Cookies["remember"];
             return View();
         }
 
@@ -101,22 +109,59 @@ namespace MvcMovie.Controllers
             ViewData["error"] = "";
             if(ModelState.IsValid){
 
+                //如果当前的用户名是cookie里面的，就直接登录不用校验。
+                if(Request.Cookies["UserName"] == user.UserName)
+                {
+                    if(Request.Form["remember"] == "1")
+                    {
+                        CookieOptions option = new CookieOptions(); 
+                        option.Expires = DateTime.Now.AddDays(7); 
+                        Response.Cookies.Append("UserName", user.UserName, option); 
+                        Response.Cookies.Append("UserPwd", user.UserPwd, option);
+                        Response.Cookies.Append("remember", "1", option); 
+                    }
+                    return RedirectToAction("Index");
+
+                }
+               
+
                 var userinfo0 = _context.User.FromSqlRaw(string.Format("select * from User where UserName='{0}'", user.UserName)).ToList();
                 // 检查用户是否存在
                 if (userinfo0.Count == 0)
                 {
                     ViewData["error"] = "该用户未注册过";
                     return View();                   
-                }else
+                }
+                else
                 {
-                     //检查用户和密码是否对应
+                    //检查用户和密码是否对应
                     var pwdMD5 = Encrypt.ByMd5_1(user.UserPwd);
                     if (userinfo0[0].UserPwd == pwdMD5)
                     {
+
+                        //如果变了一个用户，先把之前用户的cookie清除
+                        if(Request.Cookies["UserName"] != user.UserName)
+                        {
+                            Response.Cookies.Delete("UserName");
+                            Response.Cookies.Delete("UserPwd");
+                            Response.Cookies.Delete("remember"); 
+                        }
+
+                        //如果选中七天免登录则把用户账号和密码存入cookie
+                        if(Request.Form["remember"] == "1")
+                        {
+                            CookieOptions option = new CookieOptions(); 
+                            option.Expires = DateTime.Now.AddDays(7); 
+                            Response.Cookies.Append("UserName", user.UserName, option); 
+                            Response.Cookies.Append("UserPwd", pwdMD5, option); //存的密码是加密过的
+                            Response.Cookies.Append("remember", "1", option); 
+
+                        }
                         //把用户id存进session中
                         HttpContext.Session.SetString("user",userinfo0[0].Id.ToString());
                         return RedirectToAction("Index");
-                    }else
+                    }
+                    else
                     {
                         ViewData["error"] = "密码输入错误";
                         return View();
@@ -125,7 +170,6 @@ namespace MvcMovie.Controllers
             }
             ViewData["error"] = "用户名或密码长度不合法";
             return View();
- 
         }
 
 
@@ -161,6 +205,8 @@ namespace MvcMovie.Controllers
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.Id == id);
+        
         }
+
     }
 }
