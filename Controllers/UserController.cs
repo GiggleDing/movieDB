@@ -15,10 +15,7 @@ namespace MvcMovie.Controllers
 {
 
     public class UserController : Controller
-    {
-
-        CookieBuilder cookie_user_name = new CookieBuilder();
-        CookieBuilder cookie_user_pwd = new CookieBuilder();      
+    {   
         private readonly MvcUserContext _context;
 
         public UserController(MvcUserContext context)
