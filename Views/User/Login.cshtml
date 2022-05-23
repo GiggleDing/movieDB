@@ -11,91 +11,87 @@
   <head>
     <title>登录</title>
 	<meta name="decorator" content="default"/>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         *{
-    margin: 0 auto;
-    }
-    body{
-        background-image:url('https://img0.baidu.com/it/u=3809453004,50666135&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800');
-    
-    }
-    .container{
-        position: relative;
-        top: 100px;
-    }
-    .news-nav{
-        clear: both;
-        height: 80px;
-        margin-left: 10px;
-        margin-right: 10px;
-        width: 300px;
         margin: 0 auto;
-    }
+        }
+        body{
+            background-image:url('https://img0.baidu.com/it/u=3809453004,50666135&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800');
+        
+        }
+        .container{
+            position: relative;
+            top: 100px;
+        }
+        .news-nav{
+            clear: both;
+            height: 80px;
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 300px;
+            margin: 0 auto;
+        }
 
-    .modal-dialog{
-        max-width: 100% !important;
-    }
-    .modal-content{
-        background:rgba(0,0,10,0.5);
-        width: 450px;
-    }
-    .loginForm{
-        width: 400px;
-    }
-    .loginForm .form-group{
-        margin: 25px 0;
-    }
-    .loginForm .form-group .form-control{
-        height: 40px;
-        font-size: 15px;
-    }
-    input[type="checkbox"]{
-        position:relative;
-        top:-2px;
-        vertical-align: middle;
-        cursor: pointer;
-        zoom:1.6;
-    }
-    input[type="radio"]{
-        position:relative;
-        top:-3px;
-        vertical-align: middle;
-        cursor: pointer;
-        zoom:1.6;
-    }
-    .btn-primary{
-        background-color: #909090; 
-        border: 0px solid transparent;
-        width: 400px;
-        height: 50px;
-        font-size: 24px;
-        font-family: STKaiti;
-    }
-    label{
-        color: #fff;
-        font-size: 16px;
-    }
+        .modal-dialog{
+            max-width: 100% !important;
+        }
+        .modal-content{
+            background:rgba(0,0,10,0.5);
+            width: 450px;
+        }
+        .loginForm{
+            width: 400px;
+        }
+        .loginForm .form-group{
+            margin: 25px 0;
+        }
+        .loginForm .form-group .form-control{
+            height: 40px;
+            font-size: 15px;
+        }
+        input[type="checkbox"]{
+            position:relative;
+            top:-2px;
+            vertical-align: middle;
+            cursor: pointer;
+            zoom:1.6;
+        }
+        input[type="radio"]{
+            position:relative;
+            top:-3px;
+            vertical-align: middle;
+            cursor: pointer;
+            zoom:1.6;
+        }
+        .btn-primary{
+            background-color: #909090; 
+            border: 0px solid transparent;
+            width: 400px;
+            height: 50px;
+            font-size: 24px;
+            font-family: STKaiti;
+        }
+        label{
+            color: #fff;
+            font-size: 16px;
+        }
     </style>
     <script>
 
-    window.onload=function(){
+        window.onload=function()
+        {
 
-    let inputs=document.getElementsByTagName("input");
+        let inputs=document.getElementsByTagName("input");
+        //上一次选中七天免登录是，这一次就默认为选中，否则为不选中。
+        if (@ViewData["remember"] == "1")
+            inputs[2].checked=true;
+        else
+            inputs[2].checked=false;
 
-    //上一次选中七天免登录是，这一次就默认为选中，否则为不选中。
-    if (@ViewData["remember"] == "1")
-    {
-        inputs[2].checked=true;
-    }
-    else
-    {
-        inputs[2].checked=false;
-    }
-
-    } 
+        } 
 
     </script> 
 
@@ -144,27 +140,27 @@
 	</div>
     <script>
 
-    function validateForm()
-    {
-    var x=document.forms["myForm"]["UserName"].value;
-    let checkbox=document.getElementsByTagName("input");
-    //用户选中七天免登录时
-    if (checkbox[2].checked != false)
-    {
-        checkbox[2].value = "1";
-    }
-    if (x==null || x=="")
-    {
-        alert("姓名必须填写！");
-        return false;
-    }
-    var x=document.forms["myForm"]["UserPwd"].value;
-    if (x==null || x=="")
-    {
-        alert("密码必须填写！");
-        return false;
-    }
-    }
+        function validateForm()
+        {
+        var x=document.forms["myForm"]["UserName"].value;
+        let checkbox=document.getElementsByTagName("input");
+        //用户选中七天免登录时
+        if (checkbox[2].checked != false)
+        {
+            checkbox[2].value = "1";
+        }
+        if (x==null || x=="")
+        {
+            alert("姓名必须填写！");
+            return false;
+        }
+        var x=document.forms["myForm"]["UserPwd"].value;
+        if (x==null || x=="")
+        {
+            alert("密码必须填写！");
+            return false;
+        }
+        }
 
     </script>
   </body>
