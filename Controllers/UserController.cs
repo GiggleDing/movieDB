@@ -136,18 +136,19 @@ namespace MvcMovie.Controllers
                     var pwdMD5 = Encrypt.ByMd5(user.UserPwd);
                     if (userinfo0[0].UserPwd == pwdMD5)
                     {
-
-                        //如果变了一个用户，先把之前用户的cookie清除
-                        if(Request.Cookies["UserName"] != user.UserName)
-                        {
-                            Response.Cookies.Delete("UserName");
-                            Response.Cookies.Delete("UserPwd");
-                            Response.Cookies.Delete("remember"); 
-                        }
+                        //把用户id存进session中
+                        HttpContext.Session.SetString("user",userinfo0[0].Id.ToString());
 
                         //如果选中七天免登录则把用户账号和密码存入cookie
                         if(Request.Form["remember"] == "1")
                         {
+                            //如果变了一个用户，先把之前用户的cookie清除
+                            if(Request.Cookies["UserName"] != user.UserName)
+                            {
+                                Response.Cookies.Delete("UserName");
+                                Response.Cookies.Delete("UserPwd");
+                                Response.Cookies.Delete("remember"); 
+                            }
                             CookieOptions option = new CookieOptions(); 
                             option.Expires = DateTime.Now.AddDays(7); 
                             Response.Cookies.Append("UserName", user.UserName, option); 
@@ -155,8 +156,7 @@ namespace MvcMovie.Controllers
                             Response.Cookies.Append("remember", "1", option); 
 
                         }
-                        //把用户id存进session中
-                        HttpContext.Session.SetString("user",userinfo0[0].Id.ToString());
+
                         return RedirectToAction("Index");
                     }
                     else
