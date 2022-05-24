@@ -71,7 +71,7 @@ namespace MvcMovie.Controllers
                 if (userinfo.Count == 0)
                 {
                     //对密码用MD5加密
-                    user.UserPwd = Encrypt.ByMd5_1(user.UserPwd);
+                    user.UserPwd = Encrypt.ByMd5(user.UserPwd);
                     _context.Add(user);
                     await _context.SaveChangesAsync();
                     //return RedirectToAction(nameof(Index)); 
@@ -133,7 +133,7 @@ namespace MvcMovie.Controllers
                 else
                 {
                     //检查用户和密码是否对应
-                    var pwdMD5 = Encrypt.ByMd5_1(user.UserPwd);
+                    var pwdMD5 = Encrypt.ByMd5(user.UserPwd);
                     if (userinfo0[0].UserPwd == pwdMD5)
                     {
 
