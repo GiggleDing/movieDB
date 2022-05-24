@@ -139,7 +139,7 @@ namespace MvcMovie.Controllers
                         //把用户id存进session中
                         HttpContext.Session.SetString("user",userinfo0[0].Id.ToString());
 
-                        //如果选中七天免登录则把用户账号和密码存入cookie
+                        //选中七天免登录
                         if(Request.Form["remember"] == "1")
                         {
                             //如果变了一个用户，先把之前用户的cookie清除
@@ -149,6 +149,7 @@ namespace MvcMovie.Controllers
                                 Response.Cookies.Delete("UserPwd");
                                 Response.Cookies.Delete("remember"); 
                             }
+                            //将用户账号和密码存入cookie
                             CookieOptions option = new CookieOptions(); 
                             option.Expires = DateTime.Now.AddDays(7); 
                             Response.Cookies.Append("UserName", user.UserName, option); 
