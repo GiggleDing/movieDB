@@ -113,6 +113,7 @@ namespace MvcMovie.Controllers
                 if(Request.Cookies["UserName"] == user.UserName)
                 {
                     HttpContext.Session.SetString("user",userinfo0[0].Id.ToString());
+                    HttpContext.Session.SetString("userMame",userinfo0[0].UserName.ToString());
                     if(Request.Form["remember"] == "1")
                     {
                         CookieOptions option = new CookieOptions(); 
@@ -139,6 +140,7 @@ namespace MvcMovie.Controllers
                     {
                         //把用户id存进session中
                         HttpContext.Session.SetString("user",userinfo0[0].Id.ToString());
+                        HttpContext.Session.SetString("userMame",userinfo0[0].UserName.ToString());
 
                         //选中七天免登录
                         if(Request.Form["remember"] == "1")

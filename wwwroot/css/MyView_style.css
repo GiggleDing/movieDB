@@ -116,6 +116,11 @@ a{
     font-size: 20px;
 }
 
+.main-info .user-info .info-area img{
+    height: 18px;
+    width: 18px;
+}
+
 .main-info .user .user-image a{
     display: block;
     border-radius: 100%;
@@ -140,11 +145,11 @@ a{
 }
 
 .number{
-    margin-left: 50px;
+    margin-left: 40px;
     font-size: 16px;
 }
 .info{
-    margin-top: 140px;
+    margin-top: 120px;
     margin-left: 125px;
 }
 .username{
@@ -207,6 +212,87 @@ a{
     color: #6666FF;
 }
 .movie-display{
-    border: 1px solid black;
+
     height: 750px;
+}
+.sign-area{
+    border-radius: 20px;
+    background-color: #fff;
+    height: 180px;
+    width: 295px;
+    float: right;
+}
+.sign{
+    height: 60px;
+    width: 250px;
+    font-size: 15px;
+    margin-left: 30px;
+    margin-top: 35px;
+    text-align: center;
+}
+.info1{
+    margin-top: 35px;
+    margin-left: 125px;
+}
+.sign-area1{
+    border-radius: 20px;
+    height: 480px;
+    width: 295px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 50px;
+}
+.sign-area2{
+
+    border-radius: 20px;
+    background-color: #fff;
+    height: 400px;
+    width: 295px;
+    float: right;
+    margin-top: 10px;
+}
+.a{
+    float: left;
+    margin-left: 40px;
+    font-size: 18px;
+    height: 30px;
+    width: 295px;
+}
+.labels{
+
+    float: left;
+    font-size: 18px;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+.label-item1{
+    height: 35px;
+    border-radius: 10px;
+    width: 90px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 25px;
+    background-color: #CCCCFF;
+}
+.label-item2{
+    height: 35px;
+    width: 90px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 25px;
+    background-color: #CCFFFF;
+}
+.label-item3{
+    height: 35px;
+    width: 90px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 25px;
+    background-color: #FFFFCC;
+}
+.line{
+    border: 0.5px solid 	#787878;
+    margin-top: 60px;
 }
