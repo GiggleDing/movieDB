@@ -83,10 +83,12 @@ a{
 
 
 .main-info{
+    margin-top: 10px;
     height: 330px;
     margin-top: 0.5px;
 }
 .user-background{
+
     height: 330px;
     background-color:#fff;
     float: left;
@@ -96,6 +98,7 @@ a{
 
 }
 .user{
+
     float: left;
     height: 250px;
     width: 850px;
@@ -104,6 +107,7 @@ a{
     background-size: 850px 250px
 }
 .user-image{
+
     margin-left: 150px;
     margin-top: 50px;
     float: left;
@@ -122,9 +126,10 @@ a{
     background-size: 125px 125px
 }
 
-.info-area{
-    border: 1px solid black;
+.user-info .info-area{
+    border: 1px solid white;
     margin-top: 0.5px;
+    margin-top: 0px;
     background-color:#fff;
     border-radius: 20px;
     margin-right: 50px;
@@ -133,9 +138,7 @@ a{
     width: 295px;
     padding-top: 30px;
 }
-.sign-area{
-    
-}
+
 .number{
     margin-left: 50px;
     font-size: 16px;
