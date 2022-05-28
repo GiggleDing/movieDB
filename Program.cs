@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MvcAttentionContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("MvcAttentionContext") ?? throw new InvalidOperationException("Connection string 'MvcAttentionContext' not found.")));
+
+
 
 builder.Services.AddDbContext<MvcUserContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MvcUserContext") ?? throw new InvalidOperationException("Connection string 'MvcUserContext' not found.")));
@@ -16,7 +16,7 @@ builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromDays(1);
+    options.IdleTimeout = TimeSpan.FromHours(1);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
