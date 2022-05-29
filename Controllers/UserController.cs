@@ -27,8 +27,8 @@ namespace MvcMovie.Controllers
         public async Task<IActionResult> Index()
         {
             //ViewBag.Code=HttpContext.Session.GetString("user");
-            return View(await _context.User.ToListAsync());
-            //return View("/Views/User/Create.cshtml");
+            // return View(await _context.User.ToListAsync());
+            return View("/Views/Home/MyView.cshtml");
 
            
         }
