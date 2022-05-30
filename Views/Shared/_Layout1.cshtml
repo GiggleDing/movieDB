@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Movies</title>
     <link rel="stylesheet" href="~/css/MyView_style.css"  asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Community.css">
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -19,6 +20,14 @@
             <div class="container">
                 <div class="header-nav">
                     <ul class="nav-list">
+                        <li class="nav-item">
+                            <form asp-controller="MovieSearch" asp-action="Index">
+                                <p>
+                                    <input type="text" name="SearchString" />
+                                    <input type="submit" value="点我搜" />
+                                </p>
+                            </form>
+                        </li>
                         <li class="nav-item">
                             <a href="">社区</a>
                         </li>

@@ -1,0 +1,46 @@
+@{
+    Layout = "_Layout1";
+}
+@{
+    MvcMovie.Class.SearchTMDBMovies searchResult = (MvcMovie.Class.SearchTMDBMovies)ViewData["searchResult"];
+}
+
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>
+                电影海报
+            </th>
+            <th>
+                电影名称
+            </th>
+            <th>
+                电影评分
+            </th>
+            <th>
+                电影概述
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (TMDbLib.Objects.Search.SearchMovie result in searchResult.GetSearchMoives()) {
+        <tr>
+            <td>
+                <a href='/MovieDetail/Index?movieId=@result.Id'>
+                <img src='@MvcMovie.Class.TMDBImage.GetImageURL("w300", result.PosterPath)'>
+                </a>
+            </td>
+            <td>
+                <a href='/MovieDetail/Index?movieId=@result.Id'>@result.Title</a>
+                
+            </td>
+            <td>
+                @result.VoteAverage
+            </td>
+            <td>
+                @result.Overview
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
