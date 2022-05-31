@@ -17,14 +17,17 @@ namespace MvcMovie.Migrations.MvcAttention
 
             modelBuilder.Entity("MvcMovie.Models.Attention", b =>
                 {
-                    b.Property<int>("AttentionID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AttentionID")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("UserID")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("AttentionID");
+                    b.HasKey("ID");
 
                     b.ToTable("Attention");
                 });
@@ -43,6 +46,9 @@ namespace MvcMovie.Migrations.MvcAttention
 
                     b.Property<string>("Signature")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");
