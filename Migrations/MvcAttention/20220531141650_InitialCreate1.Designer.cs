@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MvcMovie.Migrations.MvcAttention
 {
     [DbContext(typeof(MvcAttentionContext))]
-    [Migration("20220528020047_InitialCreate1")]
+    [Migration("20220531141650_InitialCreate1")]
     partial class InitialCreate1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,14 +19,17 @@ namespace MvcMovie.Migrations.MvcAttention
 
             modelBuilder.Entity("MvcMovie.Models.Attention", b =>
                 {
-                    b.Property<int>("AttentionID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AttentionID")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("UserID")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("AttentionID");
+                    b.HasKey("ID");
 
                     b.ToTable("Attention");
                 });
@@ -45,6 +48,9 @@ namespace MvcMovie.Migrations.MvcAttention
 
                     b.Property<string>("Signature")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");

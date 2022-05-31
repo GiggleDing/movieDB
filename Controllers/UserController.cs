@@ -28,7 +28,7 @@ namespace MvcMovie.Controllers
         {
             //ViewBag.Code=HttpContext.Session.GetString("user");
             // return View(await _context.User.ToListAsync());
-            return View("/Views/Home/MyView.cshtml");
+            return View(await _context.User.ToListAsync());
 
            
         }

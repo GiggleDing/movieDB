@@ -53,7 +53,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,Email,Avatar,Signature")] UserInfo userInfo)
+        public async Task<IActionResult> Create([Bind("UserID,UserName,Email,Avatar,Signature")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserName,Email,Avatar,Signature")] UserInfo userInfo)
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,UserName,Email,Avatar,Signature")] UserInfo userInfo)
         {
             if (id != userInfo.ID)
             {

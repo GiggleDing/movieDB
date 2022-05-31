@@ -10,13 +10,15 @@ builder.Services.AddDbContext<MvcUserContext>(options =>
 builder.Services.AddDbContext<MvcMovieContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MvcMovieContext") ?? throw new InvalidOperationException("Connection string 'MvcMovieContext' not found.")));
 
+builder.Services.AddDbContext<MvcAttentionContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MvcAttentionContext") ?? throw new InvalidOperationException("Connection string 'MvcAttentionContext' not found.")));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromHours(1);
+    options.IdleTimeout = TimeSpan.FromDays(1);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -39,6 +41,6 @@ app.UseAuthorization();
 app.UseSession();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=UserInfo}/{id?}");
+    pattern: "{controller=HomePage}/{action=Index}/{id?}");
 
 app.Run();

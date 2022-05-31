@@ -172,6 +172,12 @@ namespace MvcMovie.Controllers
             return View("/Views/Attention/Index.cshtml");
         }
 
+/*         public IActionResult AttentionClick(){
+
+            return View("/Views/Attention/Index.cshtml");
+
+        } */
+
 
 
         // POST: Attention/AttentionClick 加入关注
@@ -189,23 +195,23 @@ namespace MvcMovie.Controllers
                     attention.AttentionID = attentionid;
                     _context.Add(attention);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(IsAttention));
+                    return RedirectToAction(nameof(Index));
                 }
- 
-
             }
-            return View();
+            return View("/Views/Attention/Index.cshtml");
         }
         // GET: Attention/FindAttention
         public async Task<IActionResult> FindAttention()
         {
             int id;
             int.TryParse(HttpContext.Session.GetString("user"),out id);
+            //var userinfo = await _context.UserInfo.FromSqlRaw(string.Format("select * from UserInfo join Attention where Attention.UserID='{0}' and UserInfo.ID = Attention.AttentionID", id)).ToListAsync();
 
-            var user = from _att in _context.Attention.Where(a => a.UserID == id)
-            join _UserInfo in _context.UserInfo
-            on _att.AttentionID equals _UserInfo.ID 
-            select _UserInfo;  
+
+            var user = from _Attention in _context.Attention
+            from _UserInfo in _context.UserInfo
+            where  _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
+            select _UserInfo;   
 
             return View("/Views/UserInfo/Index.cshtml",await user.ToListAsync());
       
