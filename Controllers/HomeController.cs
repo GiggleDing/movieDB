@@ -26,6 +26,11 @@ public class HomeController : Controller
     {
         return View();
     }
+    
+    public IActionResult UserInfo()
+    {
+        return View();
+    }
     public IActionResult MyView1()
     {
         return View();

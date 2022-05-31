@@ -1,0 +1,53 @@
+@model MvcMovie.Models.UserInfo
+@{
+    Layout = "_Layout1";
+} *
+
+<div class="container">
+    <div class="modal-dialog" id="login_form">
+        <div class="modal-content">
+
+            <div class="modal-title">
+                <br>
+                <h2 style="color: black; margin: 2; text-align: center">完善个人信息</h2>
+            </div>
+
+            <div class="modal-body index-news-list" id="index-news-list-1">
+                <form name="myForm" class="loginForm" id="loginForm" asp-action="Login"
+                    method="post">
+                    <div class="form-group">
+                        联系方式：
+                        <input class="form-control required" name="UserName" id="name" type="text"
+                            value=@ViewData["UserName"]>
+                    </div>
+
+                    <div class="form-group">
+                        邮箱：   
+                        <input class="form-control required" name="UserPwd" id="password" 
+                            value=@ViewData["UserPwd"]>
+                    </div>
+                    <div class="form-group">
+                        个性签名：   
+                        <input class="form-control required" name="UserPwd" id="password" 
+                            value=@ViewData["UserPwd"]>
+                    </div>
+                    <div class="form-group">
+                        个人标签：   
+                        <input class="form-control1 required" name="UserPwd" id="password"
+                            value=@ViewData["UserPwd"]>
+                        <input class="form-control1 required" name="UserPwd" id="password" 
+                            value=@ViewData["UserPwd"]>
+                        <input class="form-control1 required" name="UserPwd" id="password"
+                            value=@ViewData["UserPwd"]>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">保存</button>
+                    </div>
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

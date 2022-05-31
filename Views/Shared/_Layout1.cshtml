@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Movies</title>
-    <link rel="stylesheet" href="~/css/MyView_style.css"  asp-append-version="true">
+    <link rel="stylesheet" href="~/css/MyView_style.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/UserInfo_style.css" asp-append-version="true">
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -16,7 +16,7 @@
 <body>
     <header>
         <div class="header">
-            <div class="container">
+            <div class="container3">
                 <div class="header-nav">
                     <ul class="nav-list">
                         <li class="nav-item">
@@ -36,10 +36,13 @@
         </div>
     </header>
     <div class="body">
-        <main>
-            @RenderBody()
-        </main>
+        @RenderBody()
     </div>
+    <footer>
+        <div class="xiaoacao_footer">
+            <p>Copyright©2022 周晓颖，金语欣，丁俊聪，王硕 .All Rights Reserved</p>
+        </div>
+    </footer>
 </body>
 
 </html>

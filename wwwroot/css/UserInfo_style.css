@@ -1,0 +1,87 @@
+* {
+    margin: 0 auto;
+}
+
+.container {
+    position: relative;
+    top: 100px;
+}
+
+.news-nav {
+    clear: both;
+    height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.modal-dialog {
+    max-width: 100% !important;
+}
+
+.modal-content {
+    /* background: rgba(0, 0, 10, 0.5); */
+    width: 450px;
+}
+
+.loginForm {
+    width: 400px;
+}
+
+.loginForm .form-group {
+    margin: 25px 0;
+  
+    height: 50px;
+    
+}
+
+.loginForm .form-group .form-control {
+    height: 35px;
+    font-size: 15px;
+    width: 200px;
+    float: right;
+    margin-right: 90px;
+    border: 1px solid black;
+    
+}
+.loginForm .form-group .form-control1 {
+    height: 35px;
+    font-size: 15px;
+    width: 60px;
+    float: right;
+    margin-right: 33px;
+    border: 1px solid black;
+    
+}
+
+input[type="checkbox"] {
+    position: relative;
+    top: -2px;
+    vertical-align: middle;
+    cursor: pointer;
+    zoom: 1.6;
+}
+
+input[type="radio"] {
+    position: relative;
+    top: -3px;
+    vertical-align: middle;
+    cursor: pointer;
+    zoom: 1.6;
+}
+
+.btn-primary {
+    background-color: #989898;
+    border: 0px solid transparent;
+    width: 100px;
+    height: 40px;
+    font-size: 24px;
+    font-family: STKaiti;
+    margin-left: 150px;
+}
+
+label {
+    color:black;
+    font-size: 16px;
+}

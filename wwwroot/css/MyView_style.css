@@ -10,17 +10,18 @@ a{
     color: black;
 }
 .body{
-    height: 1500px;
-    border: 1px solid black;
+    height: 1400px;
     background-color: #eee;
 }
 .header{
     height: 60px;
     background-color:black;
+    border: 1px solid black;
 }
 
-.container{
-    margin: 0 auto;
+.container3{
+    background-color:black;
+    margin-top: 0px;
     width: 1226px;
     height: 60px;
 }
@@ -391,4 +392,17 @@ a{
 }
 .name1{
     margin-top: 3px;
+}
+.xiaoacao_footer{
+	height: 80px;
+	line-height: 35px;
+	/* position: fixed; */
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	background-color: black;
+	color: #fff;
+	font-family: Arial;
+	font-size: 14px;
+	letter-spacing: 1px;
 }
