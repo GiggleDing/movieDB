@@ -53,13 +53,14 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,UserName,Email,Avatar,Signature")] UserInfo userInfo)
+        public async Task<IActionResult> Create([Bind("Email,Avatar,Signature")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {
                 int id;
                 int.TryParse(HttpContext.Session.GetString("user"),out id);
-                userInfo.ID = id;
+                userInfo.UserID = id;
+                userInfo.UserName = HttpContext.Session.GetString("userMame");
                 _context.Add(userInfo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -72,13 +73,13 @@ namespace MvcMovie.Controllers
         {
             if (id == null || _context.UserInfo == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Create));
             }
 
             var userInfo = await _context.UserInfo.FindAsync(id);
             if (userInfo == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Create));
             }
             return View(userInfo);
         }
