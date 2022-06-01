@@ -12,9 +12,12 @@
             <h1>（用户名）</h1>
         </div>
         <div>
-            <a class="detailinfo" href="/Home/UserInfo">
-                <h3>完善个人信息</h3>
+
+            @* 点击关注，执行关注功能的函数，把“关注”改成“已关注” *@
+            <a class="attention" href="" onclick="showTable()">
+                <h3 id="aaa">@ViewData["attention"]</h3>
             </a>
+
         </div>
     </div>
     <div class="user-info">
@@ -72,6 +75,7 @@
                 </li>
             </ul> -->
         </div>
+        @* 根据用户收藏的电影的数量展示 *@
         <div class="movie-item" style="display: block">
             <div class="movie-display">
                 <div class="item">
@@ -291,6 +295,13 @@
         }
 
     }
+
+    function  showTable(){
+       document.getElementById("aaa").innerHTML="已关注";
+    }
+
+ 
+
 
 
 </script>

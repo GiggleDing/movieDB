@@ -31,6 +31,10 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult OtherView()
+    {
+        return View();
+    }
     public IActionResult MyView1()
     {
         return View();

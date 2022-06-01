@@ -169,7 +169,7 @@ namespace MvcMovie.Controllers
             }else{
                 ViewData["attention"] = "关注";
             }
-            return View("/Views/Attention/Index.cshtml");
+            return View("/Home/OtherView.cshtml");
         }
 
 /*         public IActionResult AttentionClick(){
