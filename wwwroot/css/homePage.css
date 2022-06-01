@@ -2,9 +2,8 @@ html, body{
   height: 100%;
 }
 body { 
-			/* background-image: url(https://www.themoviedb.org/t/p/original/wUOWu6Pa6wQwMIRYTY4p8899MeI.jpg) ; */
-			background-image: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg13.51tietu.net%2Fpic%2F2019120916%2Fnrvum5jhl30nrvum5jhl30.jpg&refer=http%3A%2F%2Fimg13.51tietu.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1656607900&t=ab8a9cf527aa463865edbc01560ff69b) ;
-
+			/*background-image: url(https://www.themoviedb.org/t/p/original/wUOWu6Pa6wQwMIRYTY4p8899MeI.jpg) ;*/
+      background-image: url(https://img13.51tietu.net/pic/2019120916/nrvum5jhl30nrvum5jhl30.jpg) ;
 			background-position: center center;
 			background-repeat:  no-repeat;
 			background-attachment: fixed;

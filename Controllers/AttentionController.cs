@@ -172,34 +172,36 @@ namespace MvcMovie.Controllers
             return View("/Home/OtherView.cshtml");
         }
 
-/*         public IActionResult AttentionClick(){
 
-            return View("/Views/Attention/Index.cshtml");
+        //GET: Attention/AttentionClick
+        public IActionResult AttentionClick(){
 
-        } */
+            return View();
+
+        } 
 
 
 
-        // POST: Attention/AttentionClick 加入关注
+        // POST: Attention/AttentionClick
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AttentionClick(int attentionid)
+        public async Task<IActionResult> AttentionClick([Bind("AttentionID")] Attention attention)
         {
-            Attention attention = new Attention();
+
             if (ModelState.IsValid)
             {
                 int id;
                 if(int.TryParse(HttpContext.Session.GetString("user"),out id))
                 {
                     attention.UserID = id;
-                    attention.AttentionID = attentionid;
                     _context.Add(attention);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
             }
-            return View("/Views/Attention/Index.cshtml");
+            return View(attention);
         }
+
         // GET: Attention/FindAttention
         public async Task<IActionResult> FindAttention()
         {
