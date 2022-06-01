@@ -198,8 +198,9 @@ namespace MvcMovie.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            return View("/Views/Attention/Index.cshtml");
+            return View("/Views/Attention/Index.cshtml",await _context.Attention.ToListAsync());
         }
+
         // GET: Attention/FindAttention
         public async Task<IActionResult> FindAttention()
         {
