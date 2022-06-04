@@ -160,16 +160,16 @@ namespace MvcMovie.Controllers
 
 
         // GET: Attention/IsAttention 判断某用户是否已关注
-        public string IsAttention(int otherid){
+        public ActionResult IsAttention(int Aid){
             int userid;
-            string user = HttpContext.Session.GetString("user");
-            int.TryParse(user,out userid);
-            bool isAttention = _context.Attention.Any(a => a.AttentionID == otherid && a.UserID == 6 );
+            int.TryParse(HttpContext.Session.GetString("user"),out userid);
+            bool isAttention = _context.Attention.Any(a => a.AttentionID == Aid && a.UserID == userid );
             if(isAttention){
                 return "取消关注";
             }else{
                 return "关注";
             }
+            return View("/Views/UserInfo/Detail.cshtml");
         }
 
         // GET: Attention/IsAttention 判断某用户是否已关注
@@ -225,6 +225,21 @@ namespace MvcMovie.Controllers
             select _UserInfo;   
 
             return View("/Views/UserInfo/Index.cshtml",await user.ToListAsync());
+      
+        }
+        // GET: Attention/FindAttentionCount
+        public int AttentionCount()
+        {
+            int id;
+            int.TryParse(HttpContext.Session.GetString("user"),out id);
+            //var userinfo = await _context.UserInfo.FromSqlRaw(string.Format("select * from UserInfo join Attention where Attention.UserID='{0}' and UserInfo.ID = Attention.AttentionID", id)).ToListAsync();
+
+            var user = from _Attention in _context.Attention
+            from _UserInfo in _context.UserInfo
+            where  _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
+            select _UserInfo;   
+
+            return user.Count();
       
         }
 

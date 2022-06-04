@@ -6,16 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
+using System.Web;
+using System.IO;
+
 
 namespace MvcMovie.Controllers
 {
     public class UserInfoController : Controller
     {
         private readonly MvcAttentionContext _context;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public UserInfoController(MvcAttentionContext context)
+        public UserInfoController(MvcAttentionContext context,IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET: UserInfo
@@ -180,5 +185,39 @@ namespace MvcMovie.Controllers
         {
           return _context.UserInfo.Any(e => e.ID == id);
         }
+
+
+        [HttpPost("UploadFile")]        
+        public async void UploadFile(IFormFile file)        
+        {            
+
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            string contentRootPath = _hostingEnvironment.ContentRootPath;
+            if (file.Length > 0)
+            {
+                
+                string fileExt = Path.GetExtension(file.FileName); //获得扩展名
+                //long fileSize = file.Length; //获得文件大小，以字节为单位
+                string newFileName = System.Guid.NewGuid().ToString() + fileExt; //随机生成新的文件名
+                var filePath = webRootPath +"/upload/";
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                var filepath = Path.GetTempFileName();
+                using (var stream = System.IO.File.Create(Path.Combine(filePath,newFileName)))
+                {     
+                    await file.CopyToAsync(stream);
+                }
+
+            }
+
+
+        }
+  
+        
+
+
+
     }
 }
