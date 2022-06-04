@@ -33,17 +33,37 @@ namespace MvcMovie.Controllers
             }
 
             var userInfo = await _context.UserInfo
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.UserID == id);
             if (userInfo == null)
             {
                 return NotFound();
             }
 
-            return View(userInfo);
+            // return RedirectToAction("MyView","Home",userInfo);
+
+            return View("/Views/UserInfo/MyView.cshtml",userInfo);
+        }
+
+
+        // GET: UserInfo/Details/5
+        public UserInfo Details1(int? id)
+        {
+            if (id == null || _context.UserInfo == null)
+            {
+                return null;
+            }
+            var userInfo =  _context.UserInfo
+                .FirstOrDefault(m => m.UserID == id);
+
+            return userInfo;
         }
 
         // GET: UserInfo/Create
         public IActionResult Create()
+        {
+            return View();
+        }
+        public IActionResult UserInfo()
         {
             return View();
         }

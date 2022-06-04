@@ -26,7 +26,7 @@ namespace MvcMovie.Controllers
         // GET: User
         public async Task<IActionResult> Index()
         {
-            //ViewBag.Code=HttpContext.Session.GetString("user");
+            // return(Content(HttpContext.Session.GetString("user")));
             // return View(await _context.User.ToListAsync());
             return View(await _context.User.ToListAsync());
 
@@ -122,7 +122,7 @@ namespace MvcMovie.Controllers
                         Response.Cookies.Append("UserPwd", user.UserPwd, option);
                         Response.Cookies.Append("remember", "1", option); 
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("MyView","Home");
 
                 }
                
@@ -161,7 +161,7 @@ namespace MvcMovie.Controllers
 
                         }
 
-                        return RedirectToAction("Index");
+                        return RedirectToAction("MyView","Home");
                     }
                     else
                     {

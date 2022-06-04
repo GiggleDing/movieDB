@@ -1,16 +1,17 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Models;
-
 namespace MvcMovie.Controllers;
-
+using Microsoft.EntityFrameworkCore;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly MvcAttentionContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, MvcAttentionContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
@@ -22,18 +23,27 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult MyView()
+    public async Task<IActionResult> MyView()
     {
-        return View();
+        UserInfoController userinfo = new UserInfoController(_context);
+        int id;
+        int.TryParse(HttpContext.Session.GetString("user"),out id);
+        UserInfo user = userinfo.Details1(id);
+        return View(user);
     }
-    
+
     public IActionResult UserInfo()
     {
         return View();
     }
     public IActionResult OtherView()
     {
+        int userid;
+        int.TryParse(HttpContext.Session.GetString("user"),out userid);
+        AttentionController attention = new AttentionController(_context);
+        ViewData["attention"] = attention.IsAttention1(99,userid);
         return View();
+
     }
     public IActionResult MyView1()
     {

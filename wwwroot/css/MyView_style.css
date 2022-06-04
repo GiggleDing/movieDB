@@ -123,15 +123,6 @@ a{
     width: 18px;
 }
 
-.main-info .user .user-image a{
-    display: block;
-    border-radius: 100%;
-    height: 125px;
-    width: 125px;
-    margin-top: 0px;
-    background: url(4.png) no-repeat 100% 100%;
-    background-size: 125px 125px
-}
 
 .user-info .info-area{
     border: 1px solid white;
@@ -420,4 +411,21 @@ a{
 	font-family: Arial;
 	font-size: 14px;
 	letter-spacing: 1px;
+}
+
+.main-info .user .user-image a{
+    display: block;
+    border-radius: 100%;
+    height: 125px;
+    width: 125px;
+    margin-top: 0px;
+    background: url(4.png) no-repeat 100% 100%;
+    background-size: 125px 125px
+}
+
+.form-control2{
+    border-radius: 100%;
+    height: 125px;
+    width: 125px;
+    opacity: 0;
 }
