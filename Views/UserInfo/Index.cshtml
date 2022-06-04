@@ -55,5 +55,11 @@
             </td>
         </tr>
 }
+
+<form asp-controller="UserInfo" asp-action="UploadFile" method="post"      enctype="multipart/form-data">    
+<input type="file" name="file" />    
+<button type="submit">Upload File</button>
+</form>
+
     </tbody>
 </table>
