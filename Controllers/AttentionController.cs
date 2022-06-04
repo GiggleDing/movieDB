@@ -160,17 +160,17 @@ namespace MvcMovie.Controllers
 
 
         // GET: Attention/IsAttention 判断某用户是否已关注
-        public ActionResult IsAttention(int Aid){
-            int userid;
-            int.TryParse(HttpContext.Session.GetString("user"),out userid);
-            bool isAttention = _context.Attention.Any(a => a.AttentionID == Aid && a.UserID == userid );
-            if(isAttention){
-                return "取消关注";
-            }else{
-                return "关注";
-            }
-            return View("/Views/UserInfo/Detail.cshtml");
-        }
+        // public ActionResult IsAttention(int Aid){
+        //     int userid;
+        //     int.TryParse(HttpContext.Session.GetString("user"),out userid);
+        //     bool isAttention = _context.Attention.Any(a => a.AttentionID == Aid && a.UserID == userid );
+        //     if(isAttention){
+        //         return "取消关注";
+        //     }else{
+        //         return "关注";
+        //     }
+        //     return View("/Views/UserInfo/Detail.cshtml");
+        // }
 
         // GET: Attention/IsAttention 判断某用户是否已关注
         public string IsAttention1(int otherid, int userid){

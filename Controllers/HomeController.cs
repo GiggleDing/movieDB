@@ -7,6 +7,7 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly MvcAttentionContext _context;
+    private readonly IWebHostEnvironment _hostingEnvironment;
 
     public HomeController(ILogger<HomeController> logger, MvcAttentionContext context)
     {
@@ -25,7 +26,7 @@ public class HomeController : Controller
     }
     public async Task<IActionResult> MyView()
     {
-        UserInfoController userinfo = new UserInfoController(_context);
+        UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
         int id;
         int.TryParse(HttpContext.Session.GetString("user"),out id);
         UserInfo user = userinfo.Details1(id);
