@@ -11,7 +11,8 @@ namespace MvcMovie.Class {
 
         public double MoviePopularity{ get; set; }
         public string MovieOverview{ get; set; }
-
+        public System.DateTime? MovieReleaseDate{ get; set; }
+        public string MovieBackdropPath{ get; set; }
         // 电影风格
         public List<Genre> MovieGenres{ get; set; }
 
@@ -33,7 +34,8 @@ namespace MvcMovie.Class {
             this.MoviePopularity = movie.Popularity;
             this.MovieOverview = movie.Overview;
             this.MovieGenres = movie.Genres;
-            // this.MovieImagePath = movie.Images.Logos[0].FilePath;
+            this.MovieReleaseDate = movie.ReleaseDate;
+            this.MovieBackdropPath = movie.BackdropPath;
         }
     }
 }
