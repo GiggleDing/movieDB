@@ -30,11 +30,13 @@ public class HomeController : Controller
         int id;
         int.TryParse(HttpContext.Session.GetString("user"),out id);
         UserInfo user = userinfo.Details1(id);
+
         return View(user);
     }
 
     public IActionResult UserInfo()
     {
+        
         return View();
     }
     public IActionResult OtherView()

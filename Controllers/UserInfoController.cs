@@ -216,13 +216,8 @@ namespace MvcMovie.Controllers
                 
             }
             
-
-
         }
   
-        
-
-
-
+    
     }
 }

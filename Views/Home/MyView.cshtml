@@ -8,10 +8,11 @@
       
             <div class="user-image">
                 
-                <form action="" enctype="multipart/form-data" method="post" accept="image/*">
+                <form asp-action="UploadFile" enctype="multipart/form-data" method="post" accept="image/*">
                 <a>
-                    <input type="file" name="files"  class="form-control2"/>
+                    <input type="file" name="file"  class="form-control2"/>
                 </a>
+                <button type="submit">上传文件</button>
                   
                 </form>
             </div>
