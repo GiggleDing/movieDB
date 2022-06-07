@@ -1,10 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MvcUserMoviesContext1>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("MvcUserMoviesContext1") ?? throw new InvalidOperationException("Connection string 'MvcUserMoviesContext1' not found.")));
-builder.Services.AddDbContext<MvcUserMoviesContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("MvcUserMoviesContext") ?? throw new InvalidOperationException("Connection string 'MvcUserMoviesContext' not found.")));
+builder.Services.AddDbContext<MvcCollectionContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MvcCollectionContext") ?? throw new InvalidOperationException("Connection string 'MvcCollectionContext' not found.")));
 
 
 

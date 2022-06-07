@@ -14,38 +14,33 @@
         <div class="main-part">
 
 
-            <div class="loginForm">
-                <form name="myForm" id="loginForm" action="/UserInfo/Create" method="post">
+            <div class="modal-body index-news-list" id="index-news-list-1">
+                <form name="myForm" class="loginForm" id="loginForm" asp-controller="UserInfo" asp-action="Edit"
+                    method="post">
                     <div class="form-group">
                         联系方式：
                         <input class="form-control required" id="name" type="text" value=@ViewData["UserName"]>
                     </div>
 
                     <div class="form-group">
-                        邮箱：
-                        <input class="form-control required" name="Email" id="password" value=@ViewData["UserPwd"]>
+                        邮箱：   
+                        <input class="form-control required" name="Email" id="password" 
+                            asp-for="Email">
                     </div>
                     <div class="form-group">
-                        个性签名：
-                        <input class="form-control required" name="Signature" id="password" value=@ViewData["UserPwd"]>
+                        个性签名：   
+                        <input class="form-control required" name="Signature" id="password" 
+                            asp-for="Signature">
                     </div>
                     <div class="form-group">
-                        个人标签：
-                        <input class="form-control1 required" name="UserPwd" id="password" value=@ViewData["UserPwd"]>
-                        <input class="form-control1 required" name="UserPwd" id="password" value=@ViewData["UserPwd"]>
-                        <input class="form-control1 required" name="UserPwd" id="password" value=@ViewData["UserPwd"]>
-                    </div>
-                    <div class="user-image">
-                        @* <form asp-action="UploadFile" enctype="multipart/form-data" method="post"
-                            accept="image/*">
-                            <a>
-                            <input type="file" name="file" class="form-control2" />
-                            </a>
-                            <button type="submit">上传文件</button>
-
-                            </form> *@
-
-                    </div>
+                        个人标签：   
+                        <input class="form-control1 required" name="UserPwd" id="password"
+                            asp-for="Label1">
+                        <input class="form-control1 required" name="UserPwd" id="password" 
+                            asp-for="Label2">
+                        <input class="form-control1 required" name="UserPwd" id="password"
+                            asp-for="Label3">
+                    </div> 
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">保存</button>
                     </div>

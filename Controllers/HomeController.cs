@@ -29,16 +29,15 @@ public class HomeController : Controller
         UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
         int id;
         int.TryParse(HttpContext.Session.GetString("user"),out id);
-        UserInfo user = userinfo.Details1(id);
 
-        return View(user);
+        return View(await userinfo.Details1(id));
     }
 
-    public IActionResult UserInfo()
+/*     public IActionResult UserInfo()
     {
         
         return View();
-    }
+    } */
     public IActionResult OtherView()
     {
         int userid;
@@ -51,6 +50,10 @@ public class HomeController : Controller
     public IActionResult MyView1()
     {
         return View();
+    }
+    public IActionResult a(int? id)
+    {
+        return RedirectToAction("UserInfo","Edit",id);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
