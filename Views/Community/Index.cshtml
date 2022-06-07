@@ -1,4 +1,206 @@
 @{
     Layout = "_Layout1";
 }
-<h1>这是社区页面</h1>
+<style type="text/css">
+    .search-result{
+        vertical-align:top;
+        position:relative;
+        z-index:99;
+        left:0px;
+        background-position: 0px 0px;
+        color:#aaa;
+        opacity: 1;
+        background: #151515;
+        width:300px;
+        height:500px;
+        display:inline-block;
+        margin: 0px;
+        transition:all 0.2s ease;
+        webkit-transition:all 0.2s ease;
+        text-align:center;
+        box-shadow: 2px 3px 2px #000;
+        padding:10px 0px 0px 0px;
+        margin: 20px;
+    }
+
+.search-result:hover{
+    background:#aaa;
+    color: #151515;
+    margin: 20px;
+    cursor:pointer;
+}
+
+#random-cars{
+    position:absolute;
+    height:500px;
+    width:calc(100% - 30px);
+    margin: 10px 0px 0px 0px;
+    background:#444;
+    overflow:hidden;
+    box-shadow:0px 0px 10px #000 inset;
+}
+
+#right-scroller{
+    position:absolute;
+    right:0px;
+    top:0px;
+    height:100%;
+    width:50px;
+    background:#333;
+    text-align:center;
+    opacity:0.2;
+    background:rgba(255,255,255,0);
+    cursor:pointer;
+}
+
+#left-scroller{
+    position:absolute;
+    left:0px;
+    top:0px;
+    height:100%;
+    width:50px;
+    text-align:center;
+    opacity:0.2;
+    background:rgba(255,255,255,0);
+    cursor:pointer;
+}
+
+#left-scroller:hover{
+    opacity:1;
+    background:rgba(255,255,255,0.2);
+}
+
+#right-scroller:hover{
+    opacity:1;
+    background:rgba(255,255,255,0.2);
+}
+
+#left-scroller svg{
+    fill:#aaa;
+    stroke:#fff;
+    stroke-width:2;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-25px 0px 0px -20px;
+}
+
+#right-scroller svg{
+    fill:#aaa;
+    stroke:#fff;
+    stroke-width:2;
+    transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-25px 0px 0px -20px;
+}
+
+#car-scroller{
+    position:absolute;
+    top:0px;
+    left:50%;
+    width:calc(260px * 13);
+    transition:all 1s ease;
+}
+
+#random-cars-shadow{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    box-shadow:0px 0px 10px #000 inset;
+    pointer-events:none;
+}
+h1 {
+    margin:0 200px;
+}
+</style>
+<script>
+    var scroll;
+
+    $(document).ready(function(){
+    $("#car-scroller div").each(function(){$(this).detach().appendTo($("#car-scroller"));});
+    $("#car-scroller").css("margin", "0px 0px 0px -" + String(parseInt($("#car-scroller").css("width")) / 2) + "px");
+    });
+
+    function sliderDirection(d){
+    clearTimeout(scroll);
+    if(d === "left"){
+        slideLeft();
+    }
+    if(d === "right"){
+        slideRight();
+    }
+    }
+
+    function slideLeft(){
+    clearTimeout(scroll);
+    $("#car-scroller").css({"left":"50%","transition":"all 0s linear"});
+    $("#car-scroller").css({"left": String(parseInt($("#car-scroller").css("left")) - 260) + "px","transition":"all 0.5s linear"});
+    scroll = setTimeout(function(){moveLeft()}, 500);
+    }
+
+    function slideRight(){
+    clearTimeout(scroll);
+    $("#car-scroller").css({"left":"50%","transition":"all 0s linear"});
+    $("#car-scroller").css({"left": String(parseInt($("#car-scroller").css("left")) + 260) + "px","transition":"all 0.5s linear"});
+    scroll = setTimeout(function(){moveRight()}, 500);
+    }
+
+    function moveLeft(){
+    $("#car-scroller div").first().detach().appendTo($("#car-scroller"));
+    slideLeft();
+    }
+
+    function moveRight(){
+    $("#car-scroller div").last().detach().prependTo($("#car-scroller"));
+    slideRight();
+    }
+
+    function slideSlider(){
+    clearTimeout(scroll);
+    $("#car-scroller").css({"left":"50%","transition":"all 0s linear"});
+    $("#car-scroller").css({"left": String(parseInt($("#car-scroller").css("left")) - 260) + "px","transition":"all 5s linear"});
+    scroll = setTimeout(function(){moveSlider()}, 5000);
+    }
+
+    function moveSlider(){
+    $("#car-scroller div").first().detach().appendTo($("#car-scroller"));
+    slideSlider();
+    }
+
+    setTimeout(function(){slideSlider("left");}, 1000);
+</script>
+@{
+    TMDbLib.Client.TMDbClient client = new TMDbLib.Client.TMDbClient("56e06b99e18e712442bf8dc3f319d84d");
+    client.DefaultLanguage = "zh";
+    client.DefaultCountry = "CN";
+    TMDbLib.Objects.General.SearchContainer<TMDbLib.Objects.Search.SearchMovie> TrendingMovies = client.GetTrendingMoviesAsync(0).Result;
+}
+<h1>每日热门电影推荐</h1>
+<div id="random-cars">
+  <div id="car-scroller">
+
+  @foreach (TMDbLib.Objects.Search.SearchMovie item in TrendingMovies.Results) {
+        <div style="height:450px; z-index:0; background-image:url('@MvcMovie.Class.TMDBImage.GetImageURL("w300", item.PosterPath)');" class="search-result">
+            <a href='/MovieDetail/Index?movieId=@item.Id'>
+                <h2 style="margin: 0px 0px">@item.Title</h2>
+            </a>
+        </div>
+  }
+  </div>
+
+  <div onmouseleave="slideSlider()" onmouseenter="sliderDirection('left')" id="left-scroller">
+    <svg id="left-scroller-graphic" width="40" height="50">
+        <polygon points="15,0 40,0 25,25 40,50 15,50 0,25"></polygon>
+    </svg>
+  </div>
+  <div onmouseleave="slideSlider()" onmouseenter="sliderDirection('right')" id="right-scroller">
+    <svg id="right-scroller-graphic" width="40" height="50">
+        <polygon points="15,0 40,0 25,25 40,50 15,50 0,25"></polygon>
+    </svg></div>
+  <div id="random-cars-shadow"></div>
+</div>

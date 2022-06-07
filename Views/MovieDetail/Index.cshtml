@@ -1,20 +1,38 @@
 @{
-    Layout = "_Layout1";
-}
-<div>
-@{
     MvcMovie.Class.TMDBMovie movie = (MvcMovie.Class.TMDBMovie)ViewData["movie"];
 }
- 
-<h1>@movie.MovieTitle</h1>
-<p>电影得分：@movie.MovieVoteAverage</p>
-<p>电影投票总数：@movie.MovieVoteCount</p>
-<p>电影票房（美元）：@movie.MoviePopularity</p>
-<p>电影Overview：@movie.MovieOverview</p>
-<p>电影风格：
-@foreach (TMDbLib.Objects.General.Genre item in movie.MovieGenres)
-{
-    <span>@item.Name</span>
-}
-</p>
-</div>
+<html>
+  <head>
+    <title>@movie.MovieTitle</title>
+    <link rel="stylesheet" href="~/css/MovieDetail.css">
+  </head>
+  <body>
+    <div class='card'>
+      <div class='card_left'>
+        <img src='@MvcMovie.Class.TMDBImage.GetImageURL("original", movie.MovieBackdropPath)'>
+      </div>
+      <div class='card_right'>
+        <!-- 电影名称 -->
+        <h1>@movie.MovieTitle</h1>
+        <div class='card_right__details'>
+          <ul>
+            <li>@movie.MovieReleaseDate</li>
+            <li>@movie.MovieVoteAverage / 10</li>
+            <li>
+                @foreach (TMDbLib.Objects.General.Genre item in movie.MovieGenres) {
+                  <span>@item.Name</span>
+                }
+            </li>
+          </ul>
+          <div class='card_right__review'>
+            <!-- 电影介绍 -->
+            <p>@movie.MovieOverview</p>
+          </div>
+          <div class='card_right__button'>
+            <a href='#'>收藏</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
