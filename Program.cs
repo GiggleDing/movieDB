@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MvcCollectionContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MvcCollectionContext") ?? throw new InvalidOperationException("Connection string 'MvcCollectionContext' not found.")));
 
 
 

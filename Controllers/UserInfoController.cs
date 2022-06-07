@@ -29,7 +29,7 @@ namespace MvcMovie.Controllers
               return View(await _context.UserInfo.ToListAsync());
         }
 
-        // GET: UserInfo/Details/5
+/*         // GET: UserInfo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.UserInfo == null)
@@ -47,18 +47,18 @@ namespace MvcMovie.Controllers
             // return RedirectToAction("MyView","Home",userInfo);
 
             return View("/Views/UserInfo/MyView.cshtml",userInfo);
-        }
+        } */
 
 
         // GET: UserInfo/Details/5
-        public UserInfo Details1(int? id)
+        public async Task<UserInfo> Details1(int? id)
         {
             if (id == null || _context.UserInfo == null)
             {
                 return null;
             }
-            var userInfo =  _context.UserInfo
-                .FirstOrDefault(m => m.UserID == id);
+            var userInfo = await _context.UserInfo
+                .FirstOrDefaultAsync(m => m.UserID == id);
 
             return userInfo;
         }
@@ -106,7 +106,7 @@ namespace MvcMovie.Controllers
             {
                 return RedirectToAction(nameof(Create));
             }
-            return View(userInfo);
+            return View("/Views/Home/UserInfo.cshtml",userInfo);
         }
 
         // POST: UserInfo/Edit/5
@@ -139,9 +139,9 @@ namespace MvcMovie.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return View("/Views/Home/UserInfo.cshtml",userInfo);
             }
-            return View(userInfo);
+            return View("/Views/Home/UserInfo.cshtml",userInfo);
         }
 
         // GET: UserInfo/Delete/5
