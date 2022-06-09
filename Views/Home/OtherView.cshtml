@@ -1,3 +1,4 @@
+@model MvcMovie.Models.UserInfo
 @{
     Layout = "_Layout1";
 }
@@ -14,7 +15,7 @@
         <div>
 
             @* 点击关注，执行关注功能的函数，把“关注”改成“已关注” *@
-            <a class="attention" href="" onclick="showTable()">
+            <a class="attention" asp-controller="Attention" asp-action="AttentionClick" asp-route-otherid="11" onclick="showTable()">
                 <h3 id="aaa">@ViewData["attention"]</h3>
             </a>
 
@@ -26,7 +27,7 @@
                 <img src="~/css/phone.jpg"> 联系方式:
             </p>
             <p class="number">
-                <img src="~/css/email.jpg"> 邮箱：
+                <img src="~/css/email.jpg"> 邮箱：@Html.DisplayFor(model => model.Email)
             </p>
             <p class="info">个人简介</p>
         </div>
@@ -297,7 +298,7 @@
     }
 
     function  showTable(){
-       document.getElementById("aaa").innerHTML="已关注";
+       document.getElementById("aaa").innerHTML="取消关注";
     }
 
  

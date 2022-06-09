@@ -21,6 +21,7 @@
         </div>
         <div>
             <a class="detailinfo" asp-controller="UserInfo" asp-action="Edit" asp-route-id="@Model.ID">
+            @* <a class="detailinfo" asp-controller="UserInfo" asp-action="Index" ></a> *@
                 <h3>完善个人信息</h3>
             </a>
         </div>
@@ -47,9 +48,9 @@
                 <div class="line"></div> 
             <div class="labels">
                 <ul class="label-bar">
-                    <li class="label-item1">爱情</li>
-                    <li class="label-item2">悬疑</li>
-                    <li class="label-item3">恐怖</li>
+                    <li class="label-item1">@Html.DisplayFor(model => model.Label1)</li>
+                    <li class="label-item2">@Html.DisplayFor(model => model.Label2)</li>
+                    <li class="label-item3">@Html.DisplayFor(model => model.Label3)</li>
                 </ul>
             </div>
         </div>

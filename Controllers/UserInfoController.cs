@@ -78,7 +78,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Email,Avatar,Signature")] UserInfo userInfo)
+        public async Task<IActionResult> Create([Bind("UserID,UserName,Email,Avatar,Signature")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace MvcMovie.Controllers
         // GET: UserInfo/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.UserInfo == null)
+             if (id == null || _context.UserInfo == null)
             {
                 return RedirectToAction(nameof(Create));
             }
@@ -114,7 +114,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserID,UserName,Email,Avatar,Signature,Label1,Label2,Labele3")] UserInfo userInfo)
+        public async Task<IActionResult> Edit(int? id, [Bind("ID,UserID,UserName,Email,Avatar,Signature,Label1,Label2,Labele3")] UserInfo userInfo)
         {
             if (id != userInfo.ID)
             {
@@ -143,7 +143,35 @@ namespace MvcMovie.Controllers
             }
             return View("/Views/Home/UserInfo.cshtml",userInfo);
         }
+        public async Task<IActionResult> Edit1(int? id, UserInfo userInfo)
+        {
+            if (id != userInfo.ID)
+            {
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(userInfo);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserInfoExists(userInfo.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return View("/Views/Home/UserInfo.cshtml",userInfo);
+            }
+            return View("/Views/Home/UserInfo.cshtml",userInfo);
+        }
         // GET: UserInfo/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

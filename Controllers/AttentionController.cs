@@ -182,19 +182,19 @@ namespace MvcMovie.Controllers
             }
         }
 
-        //GET: Attention/AttentionClick
-        public IActionResult AttentionClick(){
+        // //GET: Attention/AttentionClick
+        // public IActionResult AttentionClick(){
 
-            return View();
+        //     return View();
 
-        } 
+        // } 
 
 
 
         // POST: Attention/AttentionClick
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AttentionClick([Bind("AttentionID")] Attention attention)
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AttentionClick(int otherid)
         {
 
             if (ModelState.IsValid)
@@ -202,13 +202,16 @@ namespace MvcMovie.Controllers
                 int id;
                 if(int.TryParse(HttpContext.Session.GetString("user"),out id))
                 {
+                    Attention attention = new Attention();
+                    attention.AttentionID = otherid;
                     attention.UserID = id;
                     _context.Add(attention);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("OtherView","Home");
                 }
             }
-            return View(attention);
+            return RedirectToAction("OtherView","Home");
+            
         }
 
         // GET: Attention/FindAttention

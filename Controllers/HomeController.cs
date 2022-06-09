@@ -37,13 +37,16 @@ public class HomeController : Controller
     {
         return View();
     } */
-    public IActionResult OtherView()
+    public async Task<IActionResult> OtherView()
     {
         int userid;
         int.TryParse(HttpContext.Session.GetString("user"),out userid);
         AttentionController attention = new AttentionController(_context);
-        ViewData["attention"] = attention.IsAttention1(99,userid);
-        return View();
+        ViewData["attention"] = attention.IsAttention1(11,userid);
+
+        UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
+        return View(await userinfo.Details1(11));
+        // return View();
 
     }
     public IActionResult MyView1()
