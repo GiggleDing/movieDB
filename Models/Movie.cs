@@ -4,12 +4,17 @@ namespace MvcMovie.Models
 {
     public class Movie
     {
-        public int Id { get; set; }
-        public string? Title { get; set; }
+        public int MovieId{ get; set; }
+        public string MovieTitle{ get; set; }
+        public double MovieVoteAverage{ get; set; }
+        public int MovieVoteCount{ get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
-        public string? Genre { get; set; }
-        public decimal Price { get; set; }
+        public double MoviePopularity{ get; set; }
+        public string MovieOverview{ get; set; }
+        public System.DateTime? MovieReleaseDate{ get; set; }
+        public string MovieBackdropPath{ get; set; }
+
+        public List<Movie> movieList{ get; set; }
+
     }
 }

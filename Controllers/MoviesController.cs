@@ -35,7 +35,7 @@ namespace MvcMovie.Controllers
             }
 
             var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.MovieId == id);
             if (movie == null)
             {
                 return NotFound();
@@ -90,7 +90,7 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
         {
-            if (id != movie.Id)
+            if (id != movie.MovieId)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace MvcMovie.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.Id))
+                    if (!MovieExists(movie.MovieId))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace MvcMovie.Controllers
             }
 
             var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.MovieId == id);
             if (movie == null)
             {
                 return NotFound();
@@ -149,7 +149,7 @@ namespace MvcMovie.Controllers
 
         private bool MovieExists(int id)
         {
-            return _context.Movie.Any(e => e.Id == id);
+            return _context.Movie.Any(e => e.MovieId == id);
         }
     }
 }

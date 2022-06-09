@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Models;
+using MvcMovie.Class;
+
 namespace MvcMovie.Controllers;
-using Microsoft.EntityFrameworkCore;
+
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -15,15 +17,33 @@ public class HomeController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-
     public IActionResult Privacy()
     {
         return View();
     }
+
+    public IActionResult Index()
+    {
+        TMDBMovie[] tmdbMovie = new TMDBMovie[5];
+        for(int i = 0; i < tmdbMovie.Length; i++)
+        {
+            tmdbMovie[i] = new TMDBMovie();
+            tmdbMovie[i].searchMovieById(51533);
+        }
+
+        var movieList = new List<Movie>()
+        {
+            new Movie{
+                MovieTitle=tmdbMovie[0].MovieTitle
+            },
+            new Movie{
+                MovieTitle=tmdbMovie[1].MovieTitle
+            }
+        };
+
+        return View(movieList);
+    }
+
     public async Task<IActionResult> MyView()
     {
         UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
@@ -46,14 +66,26 @@ public class HomeController : Controller
         return View();
 
     }
-    public IActionResult MyView1()
-    {
-        return View();
-    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    // [HttpPost]
+    // [ValidateAntiForgeryToken]
+    //     public async Task<IActionResult> Search(string MovieInfo,[Bind("MovieId")] Movie movie)
+    //     {
+    //         if (ModelState.IsValid)
+    //         {
+    //             SearchTMDBMovies searchMovie = new SearchTMDBMovies();
+    //             searchMovie.Search(MovieInfo);
+    //             movie.MovieTitle = searchMovie.GetSearchMoives;
+    //             await _context.SaveChangesAsync();
+    //             return RedirectToAction(nameof(Index));
+    //         }
+    //         return View(movie);
+    //     }
+
 }
