@@ -8,14 +8,12 @@
     client.DefaultCountry = "CN";
     TMDbLib.Objects.General.SearchContainer<TMDbLib.Objects.Search.SearchMovie> TrendingMovies = client.GetTrendingMoviesAsync(0).Result;
 }
-<li class="nav-item">
+<div class="">
     <form asp-controller="MovieSearch" asp-action="Index">
-        <p>
-            <input type="text" name="SearchString" />
-                <input type="submit" value="点我搜" />
-                    </p>
+        <input id="search_input" type="text" name="SearchString" />
+        <input id="submit_input" type="submit" value="点我搜" />
     </form>
-</li>
+</div>
 
 <h1>每日热门电影推荐</h1>
 <div id="random-cars">
@@ -174,6 +172,15 @@
 
 #movie-item{
     margin-top:500px;
+}
+
+#search_input{
+    height:50px;
+    width:50%;
+}
+#submit_input{
+    height:50px;
+    width:150px
 }
 
 h1 {

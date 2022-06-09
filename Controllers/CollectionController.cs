@@ -15,9 +15,6 @@ namespace MvcMovie.Controllers
 
         public CollectionController(MvcCollectionContext context)
         {
-
-
-
             _context = context;
         }
 
