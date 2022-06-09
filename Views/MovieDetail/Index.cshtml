@@ -29,7 +29,8 @@
             <p>@movie.MovieOverview</p>
           </div>
           <div class='card_right__button'>
-            <a href='#'>收藏</a>
+           <a asp-controller="MovieDetail" asp-action="CollectClick" asp-route-id="@movie.MovieId">收藏</a>  
+@*            <a href='#'>收藏</a>  *@
           </div>
         </div>
       </div>
