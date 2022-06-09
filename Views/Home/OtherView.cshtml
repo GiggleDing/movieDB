@@ -14,7 +14,7 @@
         <div>
 
             @* 点击关注，执行关注功能的函数，把“关注”改成“已关注” *@
-            <a class="attention" href="" onclick="showTable()">
+            <a class="attention" asp-controller="Attention" asp-action="AttentionClick" asp-route-otherid="" onclick="showTable()">
                 <h3 id="aaa">@ViewData["attention"]</h3>
             </a>
 

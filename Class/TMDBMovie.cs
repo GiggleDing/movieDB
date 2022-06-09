@@ -13,6 +13,7 @@ namespace MvcMovie.Class {
         public string MovieOverview{ get; set; }
         public System.DateTime? MovieReleaseDate{ get; set; }
         public string MovieBackdropPath{ get; set; }
+        public string MoviePosterPath{get; set; }
         // 电影风格
         public List<Genre> MovieGenres{ get; set; }
 
@@ -36,6 +37,7 @@ namespace MvcMovie.Class {
             this.MovieGenres = movie.Genres;
             this.MovieReleaseDate = movie.ReleaseDate;
             this.MovieBackdropPath = movie.BackdropPath;
+            this.MoviePosterPath = movie.PosterPath;
         }
     }
 }
