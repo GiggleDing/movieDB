@@ -53,10 +53,6 @@ public class HomeController : Controller
         return View(await userinfo.Details1(id));
     }
 
-/*     public IActionResult UserInfo()
-    {
-        return View();
-    } */
     public async Task<IActionResult> OtherView()
     {
         int userid;
@@ -69,37 +65,11 @@ public class HomeController : Controller
         // return View();
 
     }
-<<<<<<< HEAD
-=======
-    public IActionResult MyView1()
-    {
-        return View();
-    }
-    public IActionResult a(int? id)
-    {
-        return RedirectToAction("UserInfo","Edit",id);
-    }
->>>>>>> origin/master
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-
-    // [HttpPost]
-    // [ValidateAntiForgeryToken]
-    //     public async Task<IActionResult> Search(string MovieInfo,[Bind("MovieId")] Movie movie)
-    //     {
-    //         if (ModelState.IsValid)
-    //         {
-    //             SearchTMDBMovies searchMovie = new SearchTMDBMovies();
-    //             searchMovie.Search(MovieInfo);
-    //             movie.MovieTitle = searchMovie.GetSearchMoives;
-    //             await _context.SaveChangesAsync();
-    //             return RedirectToAction(nameof(Index));
-    //         }
-    //         return View(movie);
-    //     }
 
 }
