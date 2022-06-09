@@ -194,7 +194,7 @@ namespace MvcMovie.Controllers
         // POST: Attention/AttentionClick
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AttentionClick([Bind("AttentionID")] Attention attention)
+        public async Task<IActionResult> AttentionClick(int otherid)
         {
 
             if (ModelState.IsValid)
@@ -202,13 +202,15 @@ namespace MvcMovie.Controllers
                 int id;
                 if(int.TryParse(HttpContext.Session.GetString("user"),out id))
                 {
+                    Attention attention = new Attention();
                     attention.UserID = id;
+                    attention.AttentionID = otherid;
                     _context.Add(attention);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("OtherView","Home");
                 }
             }
-            return View(attention);
+            return RedirectToAction("OtherView","Home");
         }
 
         // GET: Attention/FindAttention
