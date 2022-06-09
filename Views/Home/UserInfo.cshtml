@@ -15,7 +15,7 @@
 
 
             <div class="modal-body index-news-list" id="index-news-list-1">
-                <form name="myForm" class="loginForm" id="loginForm" asp-controller="UserInfo" asp-action="Edit"
+                <form name="myForm" class="loginForm" id="loginForm" asp-controller="UserInfo" asp-action="Edit1"
                     method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
@@ -25,21 +25,21 @@
 
                     <div class="form-group">
                         邮箱：   
-                        <input class="form-control required" name="Email" id="password" 
+                        <input class="form-control required" name="Email"
                             asp-for="Email">
                     </div>
                     <div class="form-group">
                         个性签名：   
-                        <input class="form-control required" name="Signature" id="password" 
+                        <input class="form-control required" name="Signature" 
                             asp-for="Signature">
                     </div>
                     <div class="form-group">
                         个人标签：   
-                        <input class="form-control1 required" name="UserPwd" id="password"
+                        <input class="form-control1 required" name="UserPwd" 
                             asp-for="Label1">
-                        <input class="form-control1 required" name="UserPwd" id="password" 
+                        <input class="form-control1 required" name="UserPwd"
                             asp-for="Label2">
-                        <input class="form-control1 required" name="UserPwd" id="password"
+                        <input class="form-control1 required" name="UserPwd"
                             asp-for="Label3">
                     </div> 
                     <input type="hidden" asp-for="UserID" />

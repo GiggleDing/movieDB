@@ -20,8 +20,13 @@ namespace MvcMovie.Controllers
 
         // GET: Collection
         public async Task<IActionResult> Index()
-        {
-              return View(await _context.Collection.ToListAsync());
+        {            
+            int id;
+            int.TryParse(HttpContext.Session.GetString("user"),out id);
+            var usermovie = from user_movie in _context.Collection
+            where user_movie.UserID == 11 
+            select user_movie;
+            return View(await usermovie.ToListAsync());
         }
 
         // GET: Collection/Details/5

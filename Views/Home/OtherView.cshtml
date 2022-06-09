@@ -1,3 +1,4 @@
+@model MvcMovie.Models.UserInfo
 @{
     Layout = "_Layout1";
 }
@@ -26,7 +27,7 @@
                 <img src="~/css/phone.jpg"> 联系方式:
             </p>
             <p class="number">
-                <img src="~/css/email.jpg"> 邮箱：
+                <img src="~/css/email.jpg"> 邮箱：@Html.DisplayFor(model => model.Email)
             </p>
             <p class="info">个人简介</p>
         </div>
@@ -297,7 +298,7 @@
     }
 
     function  showTable(){
-       document.getElementById("aaa").innerHTML="已关注";
+       document.getElementById("aaa").innerHTML="取消关注";
     }
 
  

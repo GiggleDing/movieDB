@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Models;
+using MvcMovie.Class;
+
 namespace MvcMovie.Controllers;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Class;
@@ -19,15 +21,33 @@ public class HomeController : Controller
 
     }
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-
     public IActionResult Privacy()
     {
         return View();
     }
+
+    public IActionResult Index()
+    {
+        TMDBMovie[] tmdbMovie = new TMDBMovie[5];
+        for(int i = 0; i < tmdbMovie.Length; i++)
+        {
+            tmdbMovie[i] = new TMDBMovie();
+            tmdbMovie[i].searchMovieById(51533);
+        }
+
+        var movieList = new List<Movie>()
+        {
+            new Movie{
+                MovieTitle=tmdbMovie[0].MovieTitle
+            },
+            new Movie{
+                MovieTitle=tmdbMovie[1].MovieTitle
+            }
+        };
+
+        return View(movieList);
+    }
+
     public async Task<IActionResult> MyView()
     {
         UserInfoController userinfo = new UserInfoController(_context, _hostingEnvironment);
@@ -71,19 +91,12 @@ public class HomeController : Controller
         int userid;
         int.TryParse(HttpContext.Session.GetString("user"), out userid);
         AttentionController attention = new AttentionController(_context);
-        ViewData["attention"] = attention.IsAttention1(99, userid);
-        return View();
+        ViewData["attention"] = attention.IsAttention1(11,userid);
 
-    }
-    public IActionResult MyView1()
-    {
-        return View();
-    }
+        UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
+        return View(userinfo.Details1(11));
+        // return View();
 
-
-    public IActionResult a(int? id)
-    {
-        return RedirectToAction("UserInfo", "Edit", id);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

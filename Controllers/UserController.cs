@@ -122,7 +122,7 @@ namespace MvcMovie.Controllers
                         Response.Cookies.Append("UserPwd", user.UserPwd, option);
                         Response.Cookies.Append("remember", "1", option); 
                     }
-                    return RedirectToAction("MyView","Home");
+                    return RedirectToAction("Index","Community");
 
                 }
                
