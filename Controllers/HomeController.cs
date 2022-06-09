@@ -49,23 +49,37 @@ public class HomeController : Controller
         UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
         int id;
         int.TryParse(HttpContext.Session.GetString("user"),out id);
-        UserInfo user = userinfo.Details1(id);
-        return View(user);
+
+        return View(await userinfo.Details1(id));
     }
 
-    public IActionResult UserInfo()
+/*     public IActionResult UserInfo()
     {
         return View();
-    }
-    public IActionResult OtherView()
+    } */
+    public async Task<IActionResult> OtherView()
     {
         int userid;
         int.TryParse(HttpContext.Session.GetString("user"),out userid);
         AttentionController attention = new AttentionController(_context);
-        ViewData["attention"] = attention.IsAttention1(99,userid);
-        return View();
+        ViewData["attention"] = attention.IsAttention1(11,userid);
+
+        UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
+        return View(await userinfo.Details1(11));
+        // return View();
 
     }
+<<<<<<< HEAD
+=======
+    public IActionResult MyView1()
+    {
+        return View();
+    }
+    public IActionResult a(int? id)
+    {
+        return RedirectToAction("UserInfo","Edit",id);
+    }
+>>>>>>> origin/master
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
