@@ -186,18 +186,6 @@ namespace MvcMovie.Controllers
             }
         }
 
-        // //GET: Attention/AttentionClick
-        // public IActionResult AttentionClick(){
-
-        //     return View();
-
-        // } 
-
-
-
-        // POST: Attention/AttentionClick
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
         public async Task<IActionResult> AttentionClick(int otherid)
         {
             int id;
