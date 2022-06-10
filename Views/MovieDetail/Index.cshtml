@@ -67,11 +67,12 @@
             <p>@movie.MovieOverview</p>
           </div>
           <div class='card_right__button'>
-           <a asp-controller="MovieDetail" asp-action="CollectClick" asp-route-id="@movie.MovieId">收藏</a>  
-@*            <a href='#'>收藏</a>  *@
+           <a asp-controller="MovieDetail" asp-action="CollectClick" asp-route-id="@movie.MovieId" onclick="collect">@ViewData["collection"]</a>  
           </div>
         </div>
       </div>
     </div>
   </body>
 </html>
+
+

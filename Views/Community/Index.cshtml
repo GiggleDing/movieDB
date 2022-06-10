@@ -10,6 +10,7 @@
     client.DefaultCountry = "CN";
     TMDbLib.Objects.General.SearchContainer<TMDbLib.Objects.Search.SearchMovie> TrendingMovies = client.GetTrendingMoviesAsync(0).Result;
 }
+<div style="height: 1000px;">
 <div class="">
     <form asp-controller="MovieSearch" asp-action="Index">
         <input id="search_input" type="text" name="SearchString" />
@@ -57,6 +58,8 @@
     </div>  
 }
 </div>
+</div>
+
 
 <style type="text/css">
     .search-result{

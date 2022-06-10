@@ -158,23 +158,9 @@ namespace MvcMovie.Controllers
           return _context.Attention.Any(e => e.AttentionID == id);
         }
 
-
-        // GET: Attention/IsAttention 判断某用户是否已关注
-        // public ActionResult IsAttention(int Aid){
-        //     int userid;
-        //     int.TryParse(HttpContext.Session.GetString("user"),out userid);
-        //     bool isAttention = _context.Attention.Any(a => a.AttentionID == Aid && a.UserID == userid );
-        //     if(isAttention){
-        //         return "取消关注";
-        //     }else{
-        //         return "关注";
-        //     }
-        //     return View("/Views/UserInfo/Detail.cshtml");
-        // }
-
-        // GET: Attention/IsAttention 判断某用户是否已关注
+        //判断用户是否关注
         public string IsAttention1(int otherid, int userid){
-            bool isAttention = _context.Attention.Any(a => a.AttentionID == otherid && a.UserID == 6 );
+            bool isAttention = _context.Attention.Any(a => a.AttentionID == otherid && a.UserID == userid );
             if(isAttention){
                 return "取消关注";
             }else{
@@ -182,18 +168,6 @@ namespace MvcMovie.Controllers
             }
         }
 
-        // //GET: Attention/AttentionClick
-        // public IActionResult AttentionClick(){
-
-        //     return View();
-
-        // } 
-
-
-
-        // POST: Attention/AttentionClick
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
         public async Task<IActionResult> AttentionClick(int otherid)
         {
 
