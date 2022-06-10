@@ -80,14 +80,9 @@
                         <p class="release-time">@movie.MovieReleaseDate</p>
                     </div>
                 }
-
-
             </div>
         </div>
-
-
-
-
+        
         <div class="movie-item">
             <div class="movie-display">
                 <div class="item">
@@ -178,7 +173,7 @@
                 @foreach (MvcMovie.Models.UserInfo attinfo in ViewData["myatt"] as List<MvcMovie.Models.UserInfo>)
                 {
                     <div class="item1">
-                    <a href="">
+                    <a href="/Home/OtherView?Id=@attinfo.UserID">
                         <img src="@attinfo.Avatar" width="150" height="150" class="user-image1">
                     </a>
                     <div class="name0">
@@ -186,38 +181,6 @@
                     </div>
                     </div>
                 }
-               @*  <div class="item1">
-                    <a href="">
-                        <img src="~/css/4.png" width="150" height="150" class="user-image1">
-                    </a>
-                    <div class="name0">
-                        <h2 class="name1">用户名</h2>
-                    </div>
-                </div>
-                <div class="item1">
-                    <a href="">
-                        <img src="~/css/4.png" width="150" height="150" class="user-image1">
-                    </a>
-                    <div class="name0">
-                        <h2 class="name1">用户名</h2>
-                    </div>
-                </div>
-                <div class="item1">
-                    <a href="">
-                        <img src="~/css/4.png" width="150" height="150" class="user-image1">
-                    </a>
-                    <div class="name0">
-                        <h2 class="name1">用户名</h2>
-                    </div>
-                </div>
-                <div class="item1">
-                    <a href="">
-                        <img src="~/css/4.png" width="150" height="150" class="user-image1">
-                    </a>
-                    <div class="name0">
-                        <h2 class="name1">用户名</h2>
-                    </div>
-                </div> *@
             </div>
         </div>
     </div>

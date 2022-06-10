@@ -208,7 +208,7 @@ namespace MvcMovie.Controllers
                     attention.AttentionID = otherid;
                     _context.Add(attention);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("OtherView","Home");
+                    return RedirectToAction("OtherView","Home",routeValues:new {id = otherid});
                 }
             }
             return RedirectToAction("OtherView","Home");

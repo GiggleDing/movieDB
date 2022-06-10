@@ -81,21 +81,39 @@ public class HomeController : Controller
         return View(userinfo.Details1(id));
     }
 
-    /*     public IActionResult UserInfo()
-        {
-
-            return View();
-        } */
-    public IActionResult OtherView(int id)
+    public async Task<IActionResult> OtherView(int id)
     {
         int userid;
         int.TryParse(HttpContext.Session.GetString("user"), out userid);
         AttentionController attention = new AttentionController(_context);
-        ViewData["attention"] = attention.IsAttention1(11,userid);
+        ViewData["attention"] = attention.IsAttention1(id,userid);
 
         UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
+        var movieid = from _Collection in _context2.Collection
+                      where _Collection.UserID == id
+                      select _Collection.MovieID;
+
+        var idarray = movieid.ToArray();
+        TMDBMovie[] movies = new TMDBMovie[idarray.Length];
+        for (int i = 0; i < idarray.Length; i++)
+        {
+            movies[i] = new TMDBMovie();
+            movies[i].searchMovieById(idarray[i]);
+        }
+
+        var mymovie = movies.ToList();
+        ViewData["mymovie"] = mymovie;
+
+        var att = from _Attention in _context.Attention
+                      from _UserInfo in _context.UserInfo
+                      where _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
+                      select _UserInfo;
+
+
+        var attinfo = att.ToList();
+        ViewData["myatt"] = attinfo;
+
         return View(userinfo.Details1(id));
-        // return View();
 
     }
 
