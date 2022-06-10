@@ -29,26 +29,6 @@ namespace MvcMovie.Controllers
             return View(await _context.UserInfo.ToListAsync());
         }
 
-        /*         // GET: UserInfo/Details/5
-                public async Task<IActionResult> Details(int? id)
-                {
-                    if (id == null || _context.UserInfo == null)
-                    {
-                        return NotFound();
-                    }
-
-                    var userInfo = await _context.UserInfo
-                        .FirstOrDefaultAsync(m => m.UserID == id);
-                    if (userInfo == null)
-                    {
-                        return NotFound();
-                    }
-
-                    // return RedirectToAction("MyView","Home",userInfo);
-
-                    return View("/Views/UserInfo/MyView.cshtml",userInfo);
-                } */
-
 
         // GET: UserInfo/Details/5
         public UserInfo Details1(int? id)
