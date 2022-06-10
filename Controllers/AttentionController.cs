@@ -22,7 +22,7 @@ namespace MvcMovie.Controllers
         // GET: Attention
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Attention.ToListAsync());
+            return View(await _context.Attention.ToListAsync());
         }
 
         // GET: Attention/Details/5
@@ -125,7 +125,7 @@ namespace MvcMovie.Controllers
             }
 
             var attention = await _context.Attention
-                .FirstOrDefaultAsync(m => m.AttentionID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (attention == null)
             {
                 return NotFound();
@@ -148,14 +148,14 @@ namespace MvcMovie.Controllers
             {
                 _context.Attention.Remove(attention);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AttentionExists(int id)
         {
-          return _context.Attention.Any(e => e.AttentionID == id);
+            return _context.Attention.Any(e => e.AttentionID == id);
         }
 
 
@@ -173,11 +173,15 @@ namespace MvcMovie.Controllers
         // }
 
         // GET: Attention/IsAttention 判断某用户是否已关注
-        public string IsAttention1(int otherid, int userid){
-            bool isAttention = _context.Attention.Any(a => a.AttentionID == otherid && a.UserID == 6 );
-            if(isAttention){
+        public string IsAttention1(int otherid, int userid)
+        {
+            bool isAttention = _context.Attention.Any(a => a.AttentionID == otherid && a.UserID == userid);
+            if (isAttention)
+            {
                 return "取消关注";
-            }else{
+            }
+            else
+            {
                 return "关注";
             }
         }
@@ -196,11 +200,22 @@ namespace MvcMovie.Controllers
         // [ValidateAntiForgeryToken]
         public async Task<IActionResult> AttentionClick(int otherid)
         {
-
-            if (ModelState.IsValid)
+            int id;
+            if (int.TryParse(HttpContext.Session.GetString("user"), out id))
             {
-                int id;
-                if(int.TryParse(HttpContext.Session.GetString("user"),out id))
+                if (_context.Attention.Any(a => a.AttentionID == otherid && a.UserID == id))
+                {
+                    var attention = from _Attention in _context.Attention
+                       where _Attention.UserID == id && _Attention.AttentionID == otherid
+                       select _Attention;
+                    var attentionarr = attention.ToArray();
+                    for(var i = 0; i < attentionarr.Length; i++){
+                        _context.Attention.Remove(attentionarr[i]);
+                    }
+                    await _context.SaveChangesAsync();
+
+                }
+                else
                 {
                     Attention attention = new Attention();
                     attention.AttentionID = otherid;
@@ -208,44 +223,45 @@ namespace MvcMovie.Controllers
                     attention.AttentionID = otherid;
                     _context.Add(attention);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("OtherView","Home",routeValues:new {id = otherid});
+                    return RedirectToAction("OtherView", "Home", routeValues: new { id = otherid });
                 }
             }
-            return RedirectToAction("OtherView","Home");
+
+            return RedirectToAction("OtherView", "Home", routeValues: new { id = otherid });
         }
 
         // GET: Attention/FindAttention
         public async Task<IActionResult> FindAttention()
         {
             int id;
-            int.TryParse(HttpContext.Session.GetString("user"),out id);
+            int.TryParse(HttpContext.Session.GetString("user"), out id);
             //var userinfo = await _context.UserInfo.FromSqlRaw(string.Format("select * from UserInfo join Attention where Attention.UserID='{0}' and UserInfo.ID = Attention.AttentionID", id)).ToListAsync();
 
 
             var user = from _Attention in _context.Attention
-            from _UserInfo in _context.UserInfo
-            where  _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
-            select _UserInfo;   
+                       from _UserInfo in _context.UserInfo
+                       where _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
+                       select _UserInfo;
 
-            return View("/Views/UserInfo/Index.cshtml",await user.ToListAsync());
-      
+            return View("/Views/UserInfo/Index.cshtml", await user.ToListAsync());
+
         }
         // GET: Attention/FindAttentionCount
         public int AttentionCount()
         {
             int id;
-            int.TryParse(HttpContext.Session.GetString("user"),out id);
+            int.TryParse(HttpContext.Session.GetString("user"), out id);
             //var userinfo = await _context.UserInfo.FromSqlRaw(string.Format("select * from UserInfo join Attention where Attention.UserID='{0}' and UserInfo.ID = Attention.AttentionID", id)).ToListAsync();
 
             var user = from _Attention in _context.Attention
-            from _UserInfo in _context.UserInfo
-            where  _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
-            select _UserInfo;   
+                       from _UserInfo in _context.UserInfo
+                       where _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
+                       select _UserInfo;
 
             return user.Count();
-      
+
         }
 
-    
+
     }
 }

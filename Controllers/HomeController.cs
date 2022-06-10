@@ -29,7 +29,7 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         TMDBMovie[] tmdbMovie = new TMDBMovie[5];
-        for(int i = 0; i < tmdbMovie.Length; i++)
+        for (int i = 0; i < tmdbMovie.Length; i++)
         {
             tmdbMovie[i] = new TMDBMovie();
             tmdbMovie[i].searchMovieById(51533);
@@ -70,9 +70,9 @@ public class HomeController : Controller
         ViewData["mymovie"] = mymovie;
 
         var att = from _Attention in _context.Attention
-                      from _UserInfo in _context.UserInfo
-                      where _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
-                      select _UserInfo;
+                  from _UserInfo in _context.UserInfo
+                  where _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
+                  select _UserInfo;
 
 
         var attinfo = att.ToList();
@@ -86,9 +86,9 @@ public class HomeController : Controller
         int userid;
         int.TryParse(HttpContext.Session.GetString("user"), out userid);
         AttentionController attention = new AttentionController(_context);
-        ViewData["attention"] = attention.IsAttention1(id,userid);
+        ViewData["attention"] = attention.IsAttention1(id, userid);
 
-        UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
+        UserInfoController userinfo = new UserInfoController(_context, _hostingEnvironment);
         var movieid = from _Collection in _context2.Collection
                       where _Collection.UserID == id
                       select _Collection.MovieID;
@@ -105,9 +105,9 @@ public class HomeController : Controller
         ViewData["mymovie"] = mymovie;
 
         var att = from _Attention in _context.Attention
-                      from _UserInfo in _context.UserInfo
-                      where _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
-                      select _UserInfo;
+                  from _UserInfo in _context.UserInfo
+                  where _Attention.UserID == id && _UserInfo.UserID == _Attention.AttentionID
+                  select _UserInfo;
 
 
         var attinfo = att.ToList();
@@ -121,6 +121,29 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public async Task<IActionResult> Delete(int movieid)
+    {
+        int id;
+        if (int.TryParse(HttpContext.Session.GetString("user"), out id))
+        {
+            if (_context2.Collection.Any(a => a.UserID == id && a.MovieID == movieid))
+            {
+                var collection = from _Collection in _context2.Collection
+                                where _Collection.UserID == id && _Collection.MovieID == movieid
+                                select _Collection;
+                var collectionarr = collection.ToArray();
+                for (var i = 0; i < collectionarr.Length; i++)
+                {
+                    _context2.Collection.Remove(collectionarr[i]);
+                }
+                await _context2.SaveChangesAsync();
+
+            }
+        }
+
+        return RedirectToAction("MyView", "Home");
     }
 
 }
