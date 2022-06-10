@@ -8,12 +8,7 @@
             <div class="user">
 
                 <div class="user-image">
-
-
                     <img src="@Model.Avatar">
-
-
-
                 </div>
             </div>
             <div class="username">
@@ -85,109 +80,9 @@
                         <p class="release-time">@movie.MovieReleaseDate</p>
                     </div>
                 }
-
-                @* <div class="item">
-                    <a href="">
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg" width="161"
-                    height="244" class="movie-image">
-                    </a>
-                    <a href="">
-                    <h2 class="movie-name">迷失之城</h2>
-                    </a>
-                    <p class="release-time">2022-03-30</p>
-                    </div>
-
-
-                    <div class="item">
-                    <a href="">
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg" width="161"
-                    height="244" class="movie-image">
-                    </a>
-                    <a href="">
-                    <h2 class="movie-name">迷失之城</h2>
-                    </a>
-                    <p class="release-time">2022-03-30</p>
-                    </div>
-
-
-                    <div class="item">
-                    <a href="">
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg" width="161"
-                    height="244" class="movie-image">
-                    </a>
-                    <a href="">
-                    <h2 class="movie-name">迷失之城</h2>
-                    </a>
-                    <p class="release-time">2022-03-30</p>
-                    </div>
-
-
-                    <div class="item">
-                    <a href="">
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg" width="161"
-                    height="244" class="movie-image">
-                    </a>
-                    <a href="">
-                    <h2 class="movie-name">迷失之城</h2>
-                    </a>
-                    <p class="release-time">2022-03-30</p>
-                    </div>
-
-
-                    <div class="item">
-                    <a href="">
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg" width="161"
-                    height="244" class="movie-image">
-                    </a>
-                    <a href="">
-                    <h2 class="movie-name">迷失之城</h2>
-                    </a>
-                    <p class="release-time">2022-03-30</p>
-                    </div>
-
-
-                    <div class="item">
-                    <a href="">
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg" width="161"
-                    height="244" class="movie-image">
-                    </a>
-                    <a href="">
-                    <h2 class="movie-name">迷失之城</h2>
-                    </a>
-                    <p class="release-time">2022-03-30</p>
-                    </div>
-
-
-                    <div class="item">
-                    <a href="">
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg" width="161"
-                    height="244" class="movie-image">
-                    </a>
-                    <a href="">
-                    <h2 class="movie-name">迷失之城</h2>
-                    </a>
-                    <p class="release-time">2022-03-30</p>
-                    </div>
-
-
-                    <div class="item">
-                    <a href="">
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg" width="161"
-                    height="244" class="movie-image">
-                    </a>
-                    <a href="">
-                    <h2 class="movie-name">迷失之城</h2>
-                    </a>
-                    <p class="release-time">2022-03-30</p>
-                    </div> *@
-
-
             </div>
         </div>
-
-
-
-
+        
         <div class="movie-item">
             <div class="movie-display">
                 <div class="item">
@@ -278,7 +173,7 @@
                 @foreach (MvcMovie.Models.UserInfo attinfo in ViewData["myatt"] as List<MvcMovie.Models.UserInfo>)
                 {
                     <div class="item1">
-                    <a href="">
+                    <a href="/Home/OtherView?Id=@attinfo.UserID">
                         <img src="@attinfo.Avatar" width="150" height="150" class="user-image1">
                     </a>
                     <div class="name0">
@@ -286,38 +181,6 @@
                     </div>
                     </div>
                 }
-               @*  <div class="item1">
-                    <a href="">
-                        <img src="~/css/4.png" width="150" height="150" class="user-image1">
-                    </a>
-                    <div class="name0">
-                        <h2 class="name1">用户名</h2>
-                    </div>
-                </div>
-                <div class="item1">
-                    <a href="">
-                        <img src="~/css/4.png" width="150" height="150" class="user-image1">
-                    </a>
-                    <div class="name0">
-                        <h2 class="name1">用户名</h2>
-                    </div>
-                </div>
-                <div class="item1">
-                    <a href="">
-                        <img src="~/css/4.png" width="150" height="150" class="user-image1">
-                    </a>
-                    <div class="name0">
-                        <h2 class="name1">用户名</h2>
-                    </div>
-                </div>
-                <div class="item1">
-                    <a href="">
-                        <img src="~/css/4.png" width="150" height="150" class="user-image1">
-                    </a>
-                    <div class="name0">
-                        <h2 class="name1">用户名</h2>
-                    </div>
-                </div> *@
             </div>
         </div>
     </div>

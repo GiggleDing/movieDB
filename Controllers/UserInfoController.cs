@@ -51,14 +51,14 @@ namespace MvcMovie.Controllers
 
 
         // GET: UserInfo/Details/5
-        public async Task<UserInfo> Details1(int? id)
+        public UserInfo Details1(int? id)
         {
             if (id == null || _context.UserInfo == null)
             {
                 return null;
             }
-            var userInfo = await _context.UserInfo
-                .FirstOrDefaultAsync(m => m.UserID == id);
+            var userInfo = _context.UserInfo
+                .FirstOrDefault(m => m.UserID == id);
 
             return userInfo;
         }
