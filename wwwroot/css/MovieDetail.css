@@ -152,3 +152,17 @@ body .card_right__button a:hover {
   transition-property: all;
   transition-duration: 0.5s;
 }
+.header-mypage{
+  float: right;
+  width: 150px;
+  height: 50px;
+}
+.header-mypage a{
+  display: block;
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  margin-top: 0px;
+  background: url(4.png) no-repeat 100% 100%;
+  background-size: 50px 50px
+}
