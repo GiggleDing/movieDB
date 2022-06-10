@@ -48,7 +48,7 @@ public class HomeController : Controller
         return View(movieList);
     }
 
-    public async Task<IActionResult> MyView()
+    public IActionResult MyView()
     {
         UserInfoController userinfo = new UserInfoController(_context, _hostingEnvironment);
         int id;

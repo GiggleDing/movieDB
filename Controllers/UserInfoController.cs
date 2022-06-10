@@ -106,7 +106,7 @@ namespace MvcMovie.Controllers
             }
 
             var userInfo = await _context.UserInfo
-                .FirstOrDefaultAsync(m => m.UserID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (userInfo == null)
             {
                 return RedirectToAction(nameof(Create));
@@ -251,7 +251,7 @@ namespace MvcMovie.Controllers
                     userInfo.Avatar = realpath;
                     _context.Update(userInfo);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Edit", routeValues: new { id = userid });
+                    return RedirectToAction("Edit", routeValues: new { id = userInfo.ID });
 
 
                 }

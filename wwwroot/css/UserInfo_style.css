@@ -108,6 +108,14 @@ label {
     background: url(4.png) no-repeat 100% 100%;
     background-size: 200px 200px
 }
+.change-image img{
+    display: block;
+    border-radius: 100%;
+    border: 1px solid black;
+    height: 200px;
+    width: 200px;
+    margin-top: 0px;
+}
 .change-image button{
     margin-top: 50px;
     margin-left: 120px;
