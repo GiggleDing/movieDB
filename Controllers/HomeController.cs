@@ -48,7 +48,7 @@ public class HomeController : Controller
         return View(movieList);
     }
 
-    public async Task<IActionResult> MyView()
+    public IActionResult MyView()
     {
         UserInfoController userinfo = new UserInfoController(_context, _hostingEnvironment);
         int id;
@@ -78,7 +78,7 @@ public class HomeController : Controller
         var attinfo = att.ToList();
         ViewData["myatt"] = attinfo;
 
-        return View(await userinfo.Details1(id));
+        return View(userinfo.Details1(id));
     }
 
     /*     public IActionResult UserInfo()
@@ -86,7 +86,7 @@ public class HomeController : Controller
 
             return View();
         } */
-    public IActionResult OtherView()
+    public IActionResult OtherView(int id)
     {
         int userid;
         int.TryParse(HttpContext.Session.GetString("user"), out userid);
@@ -94,7 +94,7 @@ public class HomeController : Controller
         ViewData["attention"] = attention.IsAttention1(11,userid);
 
         UserInfoController userinfo = new UserInfoController(_context,_hostingEnvironment);
-        return View(userinfo.Details1(11));
+        return View(userinfo.Details1(id));
         // return View();
 
     }

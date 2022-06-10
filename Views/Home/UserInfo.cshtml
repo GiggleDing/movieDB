@@ -15,7 +15,7 @@
 
 
             <div class="modal-body index-news-list" id="index-news-list-1">
-                <form name="myForm" class="loginForm" id="loginForm" asp-controller="UserInfo" asp-action="Edit1"
+                <form name="myForm" class="loginForm" id="loginForm" asp-controller="UserInfo" asp-action="Edit"
                     method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
@@ -35,15 +35,17 @@
                     </div>
                     <div class="form-group">
                         个人标签：   
-                        <input class="form-control1 required" name="UserPwd" 
+                        <input class="form-control1 required" name="Label1" 
                             asp-for="Label1">
-                        <input class="form-control1 required" name="UserPwd"
+                        <input class="form-control1 required" name="Label2"
                             asp-for="Label2">
-                        <input class="form-control1 required" name="UserPwd"
+                        <input class="form-control1 required" name="Label3"
                             asp-for="Label3">
                     </div> 
+                    <input type="hidden" asp-for="ID" />
                     <input type="hidden" asp-for="UserID" />
                     <input type="hidden" asp-for="UserName" />
+                    <input type="hidden" asp-for="Avatar" />
 
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">保存</button>
@@ -57,7 +59,8 @@
             <div class="change-image">
 
                 <form asp-controller="UserInfo" asp-action="UploadFile" enctype="multipart/form-data" method="post" accept="image/*">
-                    <a>
+                    <a style="background: url(@Model.Avatar) no-repeat 100% 100%;background-size: 200px 200px;">
+                        @* <img src="@Model.Avatar"> *@
                         <input type="file" name="file" class="form-control2" />
                     </a>
                     <button type="submit">上传文件</button>
