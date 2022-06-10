@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Class;
 using MvcMovie.Models;
-namespace MvcMovie.Controllers {
-    public class MovieDetailController: Controller {
+namespace MvcMovie.Controllers
+{
+    public class MovieDetailController : Controller
+    {
 
         private readonly MvcCollectionContext _context;
         public MovieDetailController(MvcCollectionContext context)
@@ -26,7 +28,7 @@ namespace MvcMovie.Controllers {
             if (ModelState.IsValid)
             {
                 int userid;
-                if(int.TryParse(HttpContext.Session.GetString("user"),out userid))
+                if (int.TryParse(HttpContext.Session.GetString("user"), out userid))
                 {
                     Collection collection = new Collection();
                     collection.UserID = userid;
@@ -47,7 +49,8 @@ namespace MvcMovie.Controllers {
 
 
 
-        public IActionResult Index(int MovieId) {
+        public IActionResult Index(int MovieId)
+        {
             TMDBMovie movie = new TMDBMovie();
             movie.searchMovieById(MovieId);
             ViewData["movie"] = movie;

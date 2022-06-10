@@ -1,4 +1,4 @@
-@model IEnumerable<MvcMovie.Models.Attention>
+@model IEnumerable<movieDB.Models.wantsee>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,9 +9,6 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<p>
-    <a asp-action="AttentionClick">Attention</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -19,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.UserID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AttentionID)
+                @Html.DisplayNameFor(model => model.MovieID)
             </th>
             <th></th>
         </tr>
@@ -31,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.UserID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AttentionID)
+                @Html.DisplayFor(modelItem => item.MovieID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

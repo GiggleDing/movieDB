@@ -78,11 +78,12 @@
                             <h2 class="movie-name">@movie.MovieTitle</h2>
                         </a>
                         <p class="release-time">@movie.MovieReleaseDate</p>
+                        <a style="background-color:#D3D3D3" class="button" asp-action="Delete" asp-route-movieid="@movie.MovieId">取消收藏</a>
                     </div>
                 }
             </div>
         </div>
-        
+
         <div class="movie-item">
             <div class="movie-display">
                 <div class="item">
